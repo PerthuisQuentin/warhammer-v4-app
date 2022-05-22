@@ -36,6 +36,7 @@ export default class CareerSystem {
 			.filter(career => (
 				career.nameContains(searchCriteria.career)
 				&& career.classContains(searchCriteria.class)
+				&& (!searchCriteria.race || career.racesContains(searchCriteria.race))
 			))
 	}
 

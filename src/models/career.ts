@@ -30,4 +30,8 @@ export default class Career {
 	classContains(search: string) {
 		return this._class.includes(search)
 	}
+
+	racesContains(race: string) {
+		return this._races.includes(race)
+	}
 }
