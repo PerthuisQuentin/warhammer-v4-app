@@ -1,6 +1,6 @@
-import CareerJsonData from "../types/careerData"
-import CareerSystemSearchCriteria from "../types/careerSystemSearchCriteria"
-import Career from "./career"
+import CareerJsonData from '../types/careerData'
+import CareerSystemSearchCriteria from '../types/careerSystemSearchCriteria'
+import Career from './career'
 
 export default class CareerSystem {
     private _careers: Career[]
@@ -33,7 +33,10 @@ export default class CareerSystem {
 
 	public getFilteredCareers(searchCriteria: CareerSystemSearchCriteria): Career[] {
 		return this._careers
-			.filter(career => career.name.includes(searchCriteria.career))
+			.filter(career => (
+				career.nameContains(searchCriteria.career)
+				&& career.classContains(searchCriteria.class)
+			))
 	}
 
     private loadCareers(careersJsonData: CareerJsonData[]) {

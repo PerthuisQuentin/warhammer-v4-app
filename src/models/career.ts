@@ -22,4 +22,12 @@ export default class Career {
 	get races(): string[] {
         return this._races
     }
+
+	nameContains(search: string) {
+		return this._name.includes(search)
+	}
+
+	classContains(search: string) {
+		return this._class.includes(search)
+	}
 }

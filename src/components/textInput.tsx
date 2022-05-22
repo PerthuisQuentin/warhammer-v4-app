@@ -1,11 +1,11 @@
-import { NextPage } from 'next';
+import { NextPage } from 'next'
 
 interface Props {
 	id: string
 	label: string
 	placeholder: string
 	value: string
-	onChange: Function
+	onChange: (value: string) => void
 }
 
 const TextInput: NextPage<Props> = ({
@@ -20,17 +20,17 @@ const TextInput: NextPage<Props> = ({
 	}
 
 	return (
-		<div>
+		<div className='w-full py-2'>
 			<label
 				htmlFor={id}
-				className="block mb-2 text-sm font-medium text-gray-300"
+				className='block mb-2 text-sm font-medium text-gray-300'
 			>
 				{label}
 			</label>
 			<input
-				type="text"
+				type='text'
 				id={id}
-				className="border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+				className='border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500'
 				placeholder={placeholder}
 				value={value}
 				onChange={handleChange}
