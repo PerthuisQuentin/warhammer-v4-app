@@ -31,11 +31,17 @@ export default class CareerSystem {
     }
 
 	public getFilteredCareers(searchCriteria: CareerSystemSearchCriteria): Career[] {
+		const criteria: CareerSystemSearchCriteria = {
+			career: searchCriteria.career.toLowerCase(),
+			class: searchCriteria.class.toLowerCase(),
+			race: searchCriteria.race.toLowerCase()
+		}
+
 		return this._careers
 			.filter(career => (
-				career.nameContains(searchCriteria.career)
-				&& career.classContains(searchCriteria.class)
-				&& (!searchCriteria.race || career.racesContains(searchCriteria.race))
+				career.nameContains(criteria.career)
+				&& career.classContains(criteria.class)
+				&& (!criteria.race || career.racesContains(criteria.race))
 			))
 	}
 
