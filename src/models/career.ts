@@ -1,4 +1,4 @@
-import CareerJsonData from '../types/careerData'
+import { CareerJsonData } from 'types'
 
 export default class Career {
     private _name: string

@@ -1,6 +1,5 @@
-import CareerJsonData from '../types/careerData'
-import CareerSystemSearchCriteria from '../types/careerSystemSearchCriteria'
-import Career from './career'
+import { CareerJsonData, CareerSystemSearchCriteria } from 'types'
+import { Career } from 'models'
 
 export default class CareerSystem {
     private _careers: Career[]

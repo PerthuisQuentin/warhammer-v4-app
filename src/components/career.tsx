@@ -1,6 +1,6 @@
 import { NextPage } from 'next'
 
-import CareerModel from '../models/career'
+import { Career as CareerModel } from 'models'
 
 interface Props {
 	career: CareerModel

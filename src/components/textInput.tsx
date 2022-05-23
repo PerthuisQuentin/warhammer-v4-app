@@ -5,7 +5,7 @@ interface Props {
 	label: string
 	placeholder: string
 	value: string
-	onChange: (value: string) => void
+	onChange?: (value: string) => void
 }
 
 const TextInput: NextPage<Props> = ({
@@ -30,7 +30,7 @@ const TextInput: NextPage<Props> = ({
 			<input
 				type='text'
 				id={id}
-				className='border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500'
+				className='h-10 border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500'
 				placeholder={placeholder}
 				value={value}
 				onChange={handleChange}

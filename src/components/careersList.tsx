@@ -1,12 +1,11 @@
 import { NextPage } from 'next'
 import { useState } from 'react'
 
-import CareerSystem from '../models/careerSystem'
-import CareerSystemSearchCriteria from '../types/careerSystemSearchCriteria'
-import Career from './career'
+import { CareerSystem } from 'models'
+import { CareerSystemSearchCriteria } from 'types'
+import { Career, TextInput, SelectInput } from 'components'
+
 import careersJson from '../../data/careers.json'
-import TextInput from './textInput'
-import SelectInput from './selectInput'
 
 const careerSystem = new CareerSystem(careersJson)
 

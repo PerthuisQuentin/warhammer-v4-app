@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 
-import CareersList from '../components/careersList'
+import { CareersList } from 'components'
 
 const Home: NextPage = () => {
   return (
