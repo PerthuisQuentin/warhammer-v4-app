@@ -1,2 +1,2 @@
-export type { default as CareerJsonData } from './careerData'
-export type { default as CareerSystemSearchCriteria } from './careerSystemSearchCriteria'
+export type { CareerJsonData, CareerEvolutionJsonData, CareerRankJsonData } from './careerData'
+export type { CareerSystemSearchCriteria } from './careerSystemSearchCriteria'

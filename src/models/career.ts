@@ -1,4 +1,5 @@
 import { CareerJsonData } from 'types'
+import CareerEvolution from './careerEvolution'
 
 export default class Career {
     private _name: string
@@ -7,6 +8,7 @@ export default class Career {
     private _lowerCaseClass: string
     private _races: string[]
     private _lowerCaseRaces: string[]
+	private _evolutions: CareerEvolution[]
 
     constructor(careerData: CareerJsonData) {
         this._name = careerData.name
@@ -15,6 +17,7 @@ export default class Career {
         this._lowerCaseClass = careerData.class.toLowerCase()
         this._races = careerData.races
         this._lowerCaseRaces = careerData.races.map(race => race.toLowerCase())
+		this._evolutions = careerData.evolutions.map(careerEvolution => new CareerEvolution(careerEvolution))
     }
 
     get name(): string {
@@ -28,6 +31,10 @@ export default class Career {
 	get races(): string[] {
         return this._races
     }
+
+	get evolutions(): CareerEvolution[] {
+		return this._evolutions
+	}
 
 	nameContains(search: string) {
 		return this._lowerCaseName.includes(search)

@@ -1,4 +1,4 @@
-export default interface CareerSystemSearchCriteria {
+export interface CareerSystemSearchCriteria {
 	career: string
 	class: string
 	race: string
