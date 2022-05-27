@@ -47,4 +47,8 @@ export default class Career {
 	racesContains(race: string) {
 		return this._lowerCaseRaces.includes(race)
 	}
+
+	evolutionNamesContains(search: string) {
+		return this._evolutions.some(careerEvolution => careerEvolution.nameContains(search))
+	}
 }

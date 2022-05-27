@@ -30,6 +30,14 @@ export default class CareerSystem {
         return this._careerRaces
     }
 
+	private careerVerifyCriteria(career: Career, criteria: CareerSystemSearchCriteria) {
+		return (
+			(career.nameContains(criteria.career) || career.evolutionNamesContains(criteria.career))
+			&& career.classContains(criteria.class)
+			&& (!criteria.race || career.racesContains(criteria.race))
+		)
+	}
+
 	public getFilteredCareers(searchCriteria: CareerSystemSearchCriteria): Career[] {
 		const criteria: CareerSystemSearchCriteria = {
 			career: searchCriteria.career.toLowerCase(),
@@ -38,11 +46,7 @@ export default class CareerSystem {
 		}
 
 		return this._careers
-			.filter(career => (
-				career.nameContains(criteria.career)
-				&& career.classContains(criteria.class)
-				&& (!criteria.race || career.racesContains(criteria.race))
-			))
+			.filter(career => this.careerVerifyCriteria(career, criteria))
 	}
 
     private loadCareers(careersJsonData: CareerJsonData[]) {

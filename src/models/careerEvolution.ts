@@ -25,4 +25,8 @@ export default class CareerEvolution {
 	get characteristics(): string[] {
 		return this._characteristics
 	}
+
+	nameContains(search: string) {
+		return this._lowerCaseName.includes(search)
+	}
 }
