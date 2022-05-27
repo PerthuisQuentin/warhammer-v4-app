@@ -3,7 +3,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+	"make": "docker build -t warhammer-v4-app .",
+	"make:tar": "docker build -t warhammer-v4-app -o - . > image.tar",
+	"start:image": "docker run -p 3000:3000 warhammer-v4-app"
   },
   "dependencies": {
     "next": "latest",
