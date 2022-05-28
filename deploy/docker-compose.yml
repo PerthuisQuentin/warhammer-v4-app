@@ -1,0 +1,21 @@
+services:
+  warhammer_app:
+    container_name: warhammer_app
+    image: warhammer-v4-app
+    restart: unless-stopped
+    networks:
+      - warhammer_network
+
+  warhammer_front:
+    container_name: warhammer_front
+    image: nginx:stable-alpine
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./.htpasswd:/etc/nginx/.htpasswd
+    restart: unless-stopped
+    networks:
+      - warhammer_network
+
+networks:
+  warhammer_network:
+    name: warhammer_network

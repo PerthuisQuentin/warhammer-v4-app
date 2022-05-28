@@ -4,9 +4,8 @@
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"make": "docker build -t warhammer-v4-app .",
-		"make:tar": "docker build -t warhammer-v4-app -o - . > image.tar",
-		"start:image": "docker run -p 3000:3000 warhammer-v4-app"
+		"lint": "next lint",
+		"make": "docker build -t warhammer-v4-app ."
 	},
 	"dependencies": {
 		"next": "latest",
@@ -17,6 +16,8 @@
 		"@types/node": "17.0.4",
 		"@types/react": "17.0.38",
 		"autoprefixer": "^10.4.0",
+		"eslint": "^8.16.0",
+		"eslint-config-next": "^12.1.6",
 		"postcss": "^8.4.5",
 		"prettier": "^2.5.1",
 		"prettier-plugin-tailwindcss": "^0.1.1",
