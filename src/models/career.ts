@@ -1,38 +1,38 @@
-import { CareerJsonData } from 'types'
-import CareerEvolution from './careerEvolution'
+import { Identifiable } from 'models'
 
-export default class Career {
+import { Category, Race, Evolution } from 'models'
+
+export default class Career extends Identifiable {
     private _name: string
     private _lowerCaseName: string
-    private _class: string
-    private _lowerCaseClass: string
-    private _races: string[]
-    private _lowerCaseRaces: string[]
-	private _evolutions: CareerEvolution[]
+    
+	private _category: Category
+    private _races: Race[]
+	private _evolutions: Evolution[]
 
-    constructor(careerData: CareerJsonData) {
-        this._name = careerData.name
-        this._lowerCaseName = careerData.name.toLowerCase()
-        this._class = careerData.class
-        this._lowerCaseClass = careerData.class.toLowerCase()
-        this._races = careerData.races
-        this._lowerCaseRaces = careerData.races.map(race => race.toLowerCase())
-		this._evolutions = careerData.evolutions.map(careerEvolution => new CareerEvolution(careerEvolution))
+    constructor(id: string, name: string, category: Category, races: Race[], evolutions: Evolution[]) {
+		super(id)
+        this._name = name
+        this._lowerCaseName = name.toLowerCase()
+
+        this._category = category
+        this._races = races
+		this._evolutions = evolutions
     }
 
     get name(): string {
         return this._name
     }
 
-    get class(): string {
-        return this._class
+    get category(): Category {
+        return this._category
     }
 
-	get races(): string[] {
+	get races(): Race[] {
         return this._races
     }
 
-	get evolutions(): CareerEvolution[] {
+	get evolutions(): Evolution[] {
 		return this._evolutions
 	}
 
@@ -40,12 +40,12 @@ export default class Career {
 		return this._lowerCaseName.includes(search)
 	}
 
-	classContains(search: string) {
-		return this._lowerCaseClass.includes(search)
+	categoryContains(search: string) {
+		return this._category.nameContains(search)
 	}
 
-	racesContains(race: string) {
-		return this._lowerCaseRaces.includes(race)
+	hasRace(raceId: string) {
+		return this._races.some(race => race.id === raceId)
 	}
 
 	evolutionNamesContains(search: string) {

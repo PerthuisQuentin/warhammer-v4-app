@@ -1,19 +1,23 @@
 import { NextPage } from 'next'
 
 import { Career as CareerModel } from 'models'
-import { CareerEvolution } from 'components'
+import { Evolution } from 'components'
 
 interface Props {
 	career: CareerModel
 }
 
 const Career: NextPage<Props> = ({ career }) => {
-	const careerEvolutionItems = career.evolutions.map(careerEvolution => (
-		<CareerEvolution
-			key={careerEvolution.name}
-			careerEvolution={careerEvolution}
+	const careerEvolutionItems = career.evolutions.map(evolution => (
+		<Evolution
+			key={evolution.name}
+			evolution={evolution}
 		/>
 	))
+
+	const races = career.races
+		.map(race => race.name)
+		.join(', ')
 
 	return (
 		<div className='my-6 p-4 rounded-lg border bg-gray-800 border-gray-700'>
@@ -23,11 +27,11 @@ const Career: NextPage<Props> = ({ career }) => {
 						{career.name}
 					</span>
 					<span className='inline font-normal text-gray-400'>
-						{career.class}
+						{career.category.name}
 					</span>
 				</div>
 				<span className='inline font-normal text-gray-400'>
-					{career.races.join(', ')}
+					{races}
 				</span>
 			</div>
 			{careerEvolutionItems}

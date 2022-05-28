@@ -1,18 +1,15 @@
 import { NextPage } from 'next'
 import { useState } from 'react'
 
-import { CareerSystem } from 'models'
-import { CareerSystemSearchCriteria } from 'types'
+import { CareerSearchCriteria } from 'types'
 import { Career, TextInput, SelectInput } from 'components'
 
-import careersJson from '../../data/careers.json'
+import WarHammer from 'warHammer'
 
-const careerSystem = new CareerSystem(careersJson)
-
-const options = careerSystem.careerRaces
+const options = WarHammer.races
 	.map(race => ({
-		label: race,
-		value: race
+		label: race.name,
+		value: race.id
 	}))
 
 options.unshift({
@@ -22,20 +19,20 @@ options.unshift({
 
 const CareersList: NextPage = () => {
 	const [careerSearch, setCareerSearch] = useState('')
-	const [classSearch, setClassSearch] = useState('')
+	const [categorySearch, setCategorySearch] = useState('')
 	const [raceSelected, setRaceSelected] = useState('')
 
-	const searchCriteria: CareerSystemSearchCriteria = {
+	const searchCriteria: CareerSearchCriteria = {
 		career: careerSearch,
-		class: classSearch,
-		race: raceSelected
+		category: categorySearch,
+		raceId: raceSelected
 	}
 
-	const careerItems = careerSystem
+	const careerItems = WarHammer
 		.getFilteredCareers(searchCriteria)
 		.map(career => (
 			<Career
-				key={career.name}
+				key={career.id}
 				career={career}
 			/>
 		))
@@ -54,8 +51,8 @@ const CareersList: NextPage = () => {
 					id='classSearchInput'
 					label='Classe'
 					placeholder='Citadins'
-					value={classSearch}
-					onChange={value => setClassSearch(value)}
+					value={categorySearch}
+					onChange={value => setCategorySearch(value)}
 				/>
 				<SelectInput
 					id='raceSelectInput'
