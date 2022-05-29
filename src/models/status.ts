@@ -1,4 +1,4 @@
-import { Tier } from "models"
+import { Tier } from 'models'
 
 export default class Status {
     private _tier: Tier

@@ -11,4 +11,8 @@
     html {
         font-family: 'Roboto';
     }
+
+	body {
+		overflow-y: scroll;
+	}
 }

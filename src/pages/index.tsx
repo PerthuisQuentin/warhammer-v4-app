@@ -1,15 +1,13 @@
 import type { NextPage } from 'next'
 
-import { CareersList } from 'components'
-
 const Home: NextPage = () => {
-  return (
-    <div className='flex min-h-screen flex-col items-center bg-gray-900 text-white'>
-      <h1 className='text-4xl mt-4 font-bold'>WarHammer V4</h1>
-      <h2 className='text-2xl my-2'>Liste des carrières</h2>
-      <CareersList/>
-    </div>
-  )
+	return (
+		<div className='flex justify-center items-center text-xl font-bold text-white'>
+			<span>
+				Rien à voir ici ¯\_(ツ)_/¯
+			</span>
+		</div>
+	)
 }
 
 export default Home

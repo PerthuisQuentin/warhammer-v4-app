@@ -1,8 +1,8 @@
-import { NextPage } from 'next'
+import type { NextPage } from 'next'
 import { useState } from 'react'
 
+import { TextInput, SelectInput, CareerList } from 'components'
 import { CareerSearchCriteria } from 'types'
-import { Career, TextInput, SelectInput } from 'components'
 
 import WarHammer from 'warHammer'
 
@@ -17,7 +17,7 @@ options.unshift({
 	value: ''
 })
 
-const CareersList: NextPage = () => {
+const Careers: NextPage = () => {
 	const [careerSearch, setCareerSearch] = useState('')
 	const [categorySearch, setCategorySearch] = useState('')
 	const [raceSelected, setRaceSelected] = useState('')
@@ -27,15 +27,6 @@ const CareersList: NextPage = () => {
 		category: categorySearch,
 		raceId: raceSelected
 	}
-
-	const careerItems = WarHammer
-		.getFilteredCareers(searchCriteria)
-		.map(career => (
-			<Career
-				key={career.id}
-				career={career}
-			/>
-		))
 
 	return (
 		<div className='w-8/12 p-4'>
@@ -62,9 +53,9 @@ const CareersList: NextPage = () => {
 					onChange={value => setRaceSelected(value)}
 				/>
 			</div>
-			{careerItems}
+			<CareerList searchCriteria={searchCriteria} />
 		</div>
 	)
 }
 
-export default CareersList
+export default Careers
