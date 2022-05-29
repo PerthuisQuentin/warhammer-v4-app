@@ -1,4 +1,7 @@
-export type { CareerSearchCriteria } from './careerSearchCriteria'
+export type {
+	CareerSearchCriteria,
+	SkillSearchCriteria,
+} from './searchCriteria'
 export type {
 	CharacteristicJson,
 	CategoryJson,
@@ -6,5 +9,6 @@ export type {
 	TierJson,
 	StatusJson,
 	EvolutionJson,
-	CareerJson
+	CareerJson,
+	SkillJson
 } from './warHammerData'

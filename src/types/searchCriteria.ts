@@ -3,3 +3,8 @@ export interface CareerSearchCriteria {
 	category: string
 	raceId: string
 }
+
+export interface SkillSearchCriteria {
+	search: string
+	characteristicId: string
+}

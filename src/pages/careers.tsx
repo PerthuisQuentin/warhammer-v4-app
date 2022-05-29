@@ -6,13 +6,13 @@ import { CareerSearchCriteria } from 'types'
 
 import WarHammer from 'warHammer'
 
-const options = WarHammer.races
+const raceOptions = WarHammer.races
 	.map(race => ({
 		label: race.name,
 		value: race.id
 	}))
 
-options.unshift({
+raceOptions.unshift({
 	label: 'Toutes',
 	value: ''
 })
@@ -29,7 +29,7 @@ const Careers: NextPage = () => {
 	}
 
 	return (
-		<div className='w-8/12 p-4'>
+		<div className='sm:w-full md:w-8/12 lg:w-6/12 p-4'>
 			<div className='flex gap-4'>
 				<TextInput
 					id='careerSearchInput'
@@ -49,7 +49,7 @@ const Careers: NextPage = () => {
 					id='raceSelectInput'
 					label='Race'
 					value={raceSelected}
-					options={options}
+					options={raceOptions}
 					onChange={value => setRaceSelected(value)}
 				/>
 			</div>

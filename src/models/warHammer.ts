@@ -1,18 +1,39 @@
-import { Identifiable, Characteristic, Race, Tier, Category, Career, Evolution, Status } from 'models'
-import { CareerJson, CharacteristicJson, RaceJson, TierJson, CategoryJson, CareerSearchCriteria } from 'types'
+import {
+	Career,
+	Category,
+	Characteristic,
+	Evolution,
+	Identifiable,
+	Race,
+	Skill,
+	Specialization,
+	Status,
+	Tier,
+} from 'models'
+import {
+	CareerJson,
+	CareerSearchCriteria,
+	CategoryJson,
+	CharacteristicJson,
+	RaceJson,
+	SkillJson,
+	SkillSearchCriteria,
+	TierJson,
+} from 'types'
 
 import characteristicsFile from '../../data/characteristics.json'
 import racesFile from '../../data/races.json'
 import tiersFile from '../../data/tiers.json'
 import categoriesFile from '../../data/categories.json'
 import careersFile from '../../data/careers.json'
+import skillsFile from '../../data/skills.json'
 
 const characteristicsJson: CharacteristicJson[] = characteristicsFile
 const racesJson: RaceJson[] = racesFile
 const tiersJson: TierJson[] = tiersFile 
 const categoriesJson: CategoryJson[] = categoriesFile
 const careersJson: CareerJson[] = careersFile
-
+const skillsJson: SkillJson[] = skillsFile
 
 export default class WarHammer {
 	private _characteristics: Characteristic[]
@@ -30,6 +51,9 @@ export default class WarHammer {
 	private _careers: Career[]
 	private _careersById: Map<string, Career>
 
+	private _skills: Skill[]
+	private _skillsById: Map<string, Skill>
+
 	constructor() {
 		this._characteristics = characteristicsJson.map(characteristic => new Characteristic(characteristic.id, characteristic.name))
 		this._characteristicsById = this.buildMap(this._characteristics)
@@ -45,6 +69,11 @@ export default class WarHammer {
 
 		this._careers = this.buildCareers(careersJson)
 		this._careersById = this.buildMap(this._careers)
+
+		this._skills = this.buildSkills(skillsJson)
+		this._skillsById = this.buildMap(this._skills)
+
+		console.log(this)
 	}
 
 	private buildCareers(careers: CareerJson[]): Career[] {
@@ -78,6 +107,19 @@ export default class WarHammer {
 			})
 
 			return new Evolution(evolution.name, evolutionStatus, evolutionCharacteristics)
+		})
+	}
+
+	private buildSkills(skills: SkillJson[]): Skill[] {
+		return skills.map(skill => {
+			const skillCharacteristic = this.getCharacteristic(skill.characteristic)
+			if (!skillCharacteristic) throw new Error(`Unknown characteristic: ${skill.characteristic}`)
+
+			const skillSpecializations = skill.specializations.map(specialization => {
+				return new Specialization(specialization.id, specialization.name)
+			})
+
+			return new Skill(skill.id, skill.name, skillCharacteristic, skill.base, skill.specializationMandatory, skillSpecializations)
 		})
 	}
 
@@ -127,7 +169,15 @@ export default class WarHammer {
 		return this._careersById.get(id)
 	}
 
-	private careerVerifyCriteria(career: Career, criteria: CareerSearchCriteria) {
+	get skills(): Skill[] {
+		return this._skills
+	}
+
+	public getSkill(id: string): Skill | undefined {
+		return this._skillsById.get(id)
+	}
+
+	private careerVerifyCriteria(career: Career, criteria: CareerSearchCriteria): boolean {
 		const careerCriteria = (
 			!criteria.career
 			|| career.nameContains(criteria.career)
@@ -156,5 +206,30 @@ export default class WarHammer {
 
 		return this._careers
 			.filter(career => this.careerVerifyCriteria(career, criteria))
+	}
+
+	private skillVerifyCriteria(skill: Skill, criteria: SkillSearchCriteria): boolean {
+		const searchCriteria = (
+			!criteria.search
+			|| skill.nameContains(criteria.search)
+			|| skill.specializationNamesContains(criteria.search)
+		)
+
+		const characteristicCriteria = (
+			!criteria.characteristicId
+			|| skill.characteristic.id === criteria.characteristicId
+		)
+
+		return searchCriteria && characteristicCriteria
+	}
+
+	public getFilteredSkills(searchCriteria: SkillSearchCriteria): Skill[] {
+		const criteria: SkillSearchCriteria = {
+			search: searchCriteria.search.toLowerCase(),
+			characteristicId: searchCriteria.characteristicId
+		}
+
+		return this._skills
+			.filter(skill => this.skillVerifyCriteria(skill, criteria))
 	}
 }

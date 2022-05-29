@@ -21,7 +21,7 @@ const Career: NextPage<Props> = ({ career }) => {
 
 	return (
 		<div className='my-6 p-4 rounded-lg border bg-gray-800 border-gray-700'>
-			<div className='flex items-center justify-between'>
+			<div className='flex justify-between'>
 				<div className='flex flex-col'>
 					<span className='inline text-2xl font-bold'>
 						{career.name}

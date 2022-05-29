@@ -1,0 +1,42 @@
+import { NextPage } from 'next'
+
+import { Skill as SkillModel, Specialization } from 'models'
+
+interface Props {
+	skill: SkillModel
+}
+
+const Skill: NextPage<Props> = ({ skill }) => {
+	const attributes = [skill.base ? 'Base' : 'Avancée']
+	if (skill.grouped) attributes.push('Groupée')
+
+	const specializations = skill.specializations
+		.map(Specialization => Specialization.name)
+		.join(', ')
+
+	return (
+		<div className='my-6 p-4 rounded-lg border bg-gray-800 border-gray-700'>
+			<div className='flex justify-between mb-2'>
+				<div className='flex flex-col'>
+					<span className='inline text-2xl font-bold'>
+						{skill.name}
+					</span>
+					<span className='inline font-normal text-gray-400'>
+						{attributes.join(', ')}
+					</span>
+				</div>
+				<span className='inline font-normal text-gray-400'>
+					{skill.characteristic.name}
+				</span>
+			</div>
+			{skill.grouped && (
+				<div className='text-gray-200'>
+					<span className='font-bold'>Spécialisations : </span>
+					<span>{specializations}</span>
+				</div>
+			)}
+		</div>
+	)
+}
+
+export default Skill

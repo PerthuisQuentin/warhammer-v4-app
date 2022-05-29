@@ -7,6 +7,7 @@ export interface CharacteristicJson extends IdName {}
 export interface CategoryJson extends IdName {}
 export interface RaceJson extends IdName {}
 export interface TierJson extends IdName {}
+export interface SpecializationJson extends IdName {}
 
 export interface StatusJson {
 	tier: string
@@ -26,4 +27,13 @@ export interface CareerJson {
 	category: string
 	races: string[]
 	evolutions: EvolutionJson[]
+}
+
+export interface SkillJson {
+	id: string
+	name: string
+	characteristic: string
+	base: boolean
+	specializationMandatory: boolean
+	specializations: SpecializationJson[]
 }
