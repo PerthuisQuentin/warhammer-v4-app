@@ -8,6 +8,7 @@ import {
 	Skill,
 	Specialization,
 	Status,
+	Talent,
 	Tier,
 } from 'models'
 import {
@@ -18,6 +19,9 @@ import {
 	RaceJson,
 	SkillJson,
 	SkillSearchCriteria,
+	TalentJson,
+	TalentMaxType,
+	TalentSearchCriteria,
 	TierJson,
 } from 'types'
 
@@ -27,6 +31,7 @@ import tiersFile from '../../data/tiers.json'
 import categoriesFile from '../../data/categories.json'
 import careersFile from '../../data/careers.json'
 import skillsFile from '../../data/skills.json'
+import talentsFile from '../../data/talents.json'
 
 const characteristicsJson: CharacteristicJson[] = characteristicsFile
 const racesJson: RaceJson[] = racesFile
@@ -34,6 +39,7 @@ const tiersJson: TierJson[] = tiersFile
 const categoriesJson: CategoryJson[] = categoriesFile
 const careersJson: CareerJson[] = careersFile
 const skillsJson: SkillJson[] = skillsFile
+const talentsJson: TalentJson[] = talentsFile
 
 export default class WarHammer {
 	private _characteristics: Characteristic[]
@@ -54,6 +60,9 @@ export default class WarHammer {
 	private _skills: Skill[]
 	private _skillsById: Map<string, Skill>
 
+	private _talents: Talent[]
+	private _talentsById: Map<string, Talent>
+
 	constructor() {
 		this._characteristics = characteristicsJson.map(characteristic => new Characteristic(characteristic.id, characteristic.name))
 		this._characteristicsById = this.buildMap(this._characteristics)
@@ -73,7 +82,8 @@ export default class WarHammer {
 		this._skills = this.buildSkills(skillsJson)
 		this._skillsById = this.buildMap(this._skills)
 
-		console.log(this)
+		this._talents = this.buildTalents(talentsJson)
+		this._talentsById = this.buildMap(this._talents)
 	}
 
 	private buildCareers(careers: CareerJson[]): Career[] {
@@ -120,6 +130,25 @@ export default class WarHammer {
 			})
 
 			return new Skill(skill.id, skill.name, skillCharacteristic, skill.base, skill.specializationMandatory, skillSpecializations)
+		})
+	}
+
+	private buildTalents(talents: TalentJson[]): Talent[] {
+		return talents.map(talent => {
+			
+
+			if (talent.maxRaw) {
+				return new Talent(talent.id, talent.name, TalentMaxType.Raw, talent.maxRaw)
+			} else if (talent.maxCharacteristicId) {
+				const talentCharacteritic = this.getCharacteristic(talent.maxCharacteristicId)
+				if (!talentCharacteritic) throw new Error(`Unknown characteristic: ${talent.maxCharacteristicId}`)
+
+				return new Talent(talent.id, talent.name, TalentMaxType.Characteristic, talentCharacteritic)
+			} else if (talent.maxText) {
+				return new Talent(talent.id, talent.name, TalentMaxType.Text, talent.maxText)
+			} else {
+				return new Talent(talent.id, talent.name, TalentMaxType.None)
+			}
 		})
 	}
 
@@ -177,6 +206,14 @@ export default class WarHammer {
 		return this._skillsById.get(id)
 	}
 
+	get talents(): Talent[] {
+		return this._talents
+	}
+
+	public getTalent(id: string): Talent | undefined {
+		return this._talentsById.get(id)
+	}
+
 	private careerVerifyCriteria(career: Career, criteria: CareerSearchCriteria): boolean {
 		const careerCriteria = (
 			!criteria.career
@@ -231,5 +268,23 @@ export default class WarHammer {
 
 		return this._skills
 			.filter(skill => this.skillVerifyCriteria(skill, criteria))
+	}
+
+	private talentVerifyCriteria(talent: Talent, criteria: TalentSearchCriteria): boolean {
+		const searchCriteria = (
+			!criteria.search
+			|| talent.nameContains(criteria.search)
+		)
+
+		return searchCriteria
+	}
+
+	public getFilteredTalents(searchCriteria: TalentSearchCriteria): Talent[] {
+		const criteria: TalentSearchCriteria = {
+			search: searchCriteria.search.toLowerCase()
+		}
+
+		return this._talents
+			.filter(talent => this.talentVerifyCriteria(talent, criteria))
 	}
 }

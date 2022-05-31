@@ -37,3 +37,11 @@ export interface SkillJson {
 	specializationMandatory: boolean
 	specializations: SpecializationJson[]
 }
+
+export interface TalentJson {
+	id: string
+	name: string
+	maxRaw?: number
+	maxCharacteristicId?: string
+	maxText?: string
+}

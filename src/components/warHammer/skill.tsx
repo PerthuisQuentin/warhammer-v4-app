@@ -15,17 +15,17 @@ const Skill: NextPage<Props> = ({ skill }) => {
 		.join(', ')
 
 	return (
-		<div className='my-6 p-4 rounded-lg border bg-gray-800 border-gray-700'>
+		<div className='flex flex-col my-6 p-4 rounded-lg border bg-gray-800 border-gray-700'>
 			<div className='flex justify-between mb-2'>
 				<div className='flex flex-col'>
-					<span className='inline text-2xl font-bold'>
+					<span className='text-2xl font-bold'>
 						{skill.name}
 					</span>
-					<span className='inline font-normal text-gray-400'>
+					<span className='text-gray-400'>
 						{attributes.join(', ')}
 					</span>
 				</div>
-				<span className='inline font-normal text-gray-400'>
+				<span className='text-gray-400'>
 					{skill.characteristic.name}
 				</span>
 			</div>

@@ -14,6 +14,10 @@ const links = [
 	{
 		href: '/skills',
 		label: 'Compétences'
+	},
+	{
+		href: '/talents',
+		label: 'Talents'
 	}
 ]
 

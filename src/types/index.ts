@@ -1,14 +1,17 @@
 export type {
 	CareerSearchCriteria,
 	SkillSearchCriteria,
+	TalentSearchCriteria,
 } from './searchCriteria'
 export type {
-	CharacteristicJson,
-	CategoryJson,
-	RaceJson,
-	TierJson,
-	StatusJson,
-	EvolutionJson,
 	CareerJson,
-	SkillJson
+	CategoryJson,
+	CharacteristicJson,
+	EvolutionJson,
+	RaceJson,
+	SkillJson,
+	StatusJson,
+	TalentJson,
+	TierJson,
 } from './warHammerData'
+export { TalentMaxType } from './talents'

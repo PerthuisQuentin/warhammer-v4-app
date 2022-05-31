@@ -8,3 +8,7 @@ export interface SkillSearchCriteria {
 	search: string
 	characteristicId: string
 }
+
+export interface TalentSearchCriteria {
+	search: string
+}

@@ -13,7 +13,7 @@ const Evolution: NextPage<Props> = ({ evolution }) => {
 		.join(', ')
 
 	return (
-		<div className='my-6 p-4 rounded-lg border bg-gray-700 border-gray-600'>
+		<div className='flex flex-col p-4 my-2 rounded-lg border bg-gray-700 border-gray-600'>
 			<div className='flex items-center justify-between mb-2'>
 				<span className='text-xl font-bold'>
 					{evolution.name}
