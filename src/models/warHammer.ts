@@ -121,41 +121,49 @@ export default class WarHammer {
 	}
 
 	private buildSkills(skills: SkillJson[]): Skill[] {
-		return skills.map(skill => {
-			const skillCharacteristic = this.getCharacteristic(skill.characteristic)
-			if (!skillCharacteristic) throw new Error(`Unknown characteristic: ${skill.characteristic}`)
+		return skills
+			.map(skill => {
+				const skillCharacteristic = this.getCharacteristic(skill.characteristic)
+				if (!skillCharacteristic) throw new Error(`Unknown characteristic: ${skill.characteristic}`)
 
-			const skillSpecializations = skill.specializations.map(specialization => {
-				return new Specialization(specialization.id, specialization.name)
+				const skillSpecializations = skill.specializations
+					.map(specialization => {
+						return new Specialization(specialization.id, specialization.name)
+					})
+					.sort((specializationA, specializationB) => specializationA.name.localeCompare(specializationB.name))
+
+				return new Skill(skill.id, skill.name, skillCharacteristic, skill.base, skill.specializationMandatory, skillSpecializations)
 			})
-
-			return new Skill(skill.id, skill.name, skillCharacteristic, skill.base, skill.specializationMandatory, skillSpecializations)
-		})
+			.sort((skillA, skillB) => skillA.name.localeCompare(skillB.name))
 	}
 
 	private buildTalents(talents: TalentJson[]): Talent[] {
-		return talents.map(talent => {
-			const specializationName = talent.specializationName ?? ''
+		return talents
+			.map(talent => {
+				const specializationName = talent.specializationName ?? ''
 
-			const talentSpecializations = talent.specializations
-				? talent.specializations.map(specialization => {
-					return new Specialization(specialization.id, specialization.name)
-				})
-				: []
+				const talentSpecializations = talent.specializations
+					? talent.specializations
+						.map(specialization => {
+							return new Specialization(specialization.id, specialization.name)
+						})
+						.sort((specializationA, specializationB) => specializationA.name.localeCompare(specializationB.name))
+					: []
 
-			if (talent.maxRaw) {
-				return new Talent(talent.id, talent.name, specializationName, talentSpecializations, TalentMaxType.Raw, talent.maxRaw)
-			} else if (talent.maxCharacteristicId) {
-				const talentCharacteritic = this.getCharacteristic(talent.maxCharacteristicId)
-				if (!talentCharacteritic) throw new Error(`Unknown characteristic: ${talent.maxCharacteristicId}`)
+				if (talent.maxRaw) {
+					return new Talent(talent.id, talent.name, specializationName, talentSpecializations, TalentMaxType.Raw, talent.maxRaw)
+				} else if (talent.maxCharacteristicId) {
+					const talentCharacteritic = this.getCharacteristic(talent.maxCharacteristicId)
+					if (!talentCharacteritic) throw new Error(`Unknown characteristic: ${talent.maxCharacteristicId}`)
 
-				return new Talent(talent.id, talent.name, specializationName, talentSpecializations, TalentMaxType.Characteristic, talentCharacteritic)
-			} else if (talent.maxText) {
-				return new Talent(talent.id, talent.name, specializationName, talentSpecializations, TalentMaxType.Text, talent.maxText)
-			} else {
-				return new Talent(talent.id, talent.name, specializationName, talentSpecializations, TalentMaxType.None)
-			}
-		})
+					return new Talent(talent.id, talent.name, specializationName, talentSpecializations, TalentMaxType.Characteristic, talentCharacteritic)
+				} else if (talent.maxText) {
+					return new Talent(talent.id, talent.name, specializationName, talentSpecializations, TalentMaxType.Text, talent.maxText)
+				} else {
+					return new Talent(talent.id, talent.name, specializationName, talentSpecializations, TalentMaxType.None)
+				}
+			})
+			.sort((talentA, talentB) => talentA.name.localeCompare(talentB.name))
 	}
 
 	private buildMap(list: Identifiable[]) {
