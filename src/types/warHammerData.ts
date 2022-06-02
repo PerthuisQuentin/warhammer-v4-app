@@ -44,4 +44,6 @@ export interface TalentJson {
 	maxRaw?: number
 	maxCharacteristicId?: string
 	maxText?: string
+	specializationName?: string
+	specializations?: SpecializationJson[]
 }

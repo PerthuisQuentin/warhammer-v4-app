@@ -1,22 +1,60 @@
-import { Identifiable, Characteristic } from 'models'
+import { Identifiable, Characteristic, Specialization } from 'models'
 import { TalentMaxType } from 'types'
 
 export default class Talent extends Identifiable {
 	private _name: string
 	private _lowerCaseName: string
+	private _specializationName: string
+	private _specializations: Specialization[]
 	private _maxType: TalentMaxType
 	private _maxRaw?: number
 	private _maxCharacteristic?: Characteristic
 	private _maxText?: string
 
-	constructor(id: string, name: string, maxType: TalentMaxType.Raw, maxRaw: number)
-	constructor(id: string, name: string, maxType: TalentMaxType.Characteristic, maxCharacteristic: Characteristic)
-	constructor(id: string, name: string, maxType: TalentMaxType.Text, maxText: string)
-	constructor(id: string, name: string, maxType: TalentMaxType.None)
-    constructor(id: string, name: string, maxType: TalentMaxType, maxValue?: number | string | Characteristic) {
+	constructor(
+		id: string,
+		name: string,
+		specializationName: string,
+		specializations: Specialization[],
+		maxType: TalentMaxType.Raw,
+		maxRaw: number
+	)
+	constructor(
+		id: string,
+		name: string,
+		specializationName: string,
+		specializations: Specialization[],
+		maxType: TalentMaxType.Characteristic,
+		maxCharacteristic: Characteristic
+	)
+	constructor(
+		id: string,
+		name: string,
+		specializationName: string,
+		specializations: Specialization[],
+		maxType: TalentMaxType.Text,
+		maxText: string
+	)
+	constructor(
+		id: string,
+		name: string,
+		specializationName: string,
+		specializations: Specialization[],
+		maxType: TalentMaxType.None
+	)
+    constructor(
+		id: string,
+		name: string,
+		specializationName: string,
+		specializations: Specialization[],
+		maxType: TalentMaxType,
+		maxValue?: number | string | Characteristic
+	) {
         super(id)
         this._name = name
 		this._lowerCaseName = name.toLowerCase()
+		this._specializationName = specializationName
+		this._specializations = specializations
 		this._maxType = maxType
 
 		switch (maxType) {
@@ -38,6 +76,18 @@ export default class Talent extends Identifiable {
 
 	nameContains(search: string) {
 		return this._lowerCaseName.includes(search)
+	}
+
+	get specializationName(): string {
+		return this._specializationName
+	}
+
+	get specializations(): Specialization[] {
+		return this._specializations
+	}
+
+	get specialized(): boolean {
+		return this.specializations.length > 0
 	}
 
 	get maxType(): TalentMaxType {

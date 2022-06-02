@@ -11,7 +11,7 @@ const Skill: NextPage<Props> = ({ skill }) => {
 	if (skill.grouped) attributes.push('Groupée')
 
 	const specializations = skill.specializations
-		.map(Specialization => Specialization.name)
+		.map(specialization => specialization.name)
 		.join(', ')
 
 	return (

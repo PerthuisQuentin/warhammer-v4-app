@@ -135,19 +135,25 @@ export default class WarHammer {
 
 	private buildTalents(talents: TalentJson[]): Talent[] {
 		return talents.map(talent => {
-			
+			const specializationName = talent.specializationName ?? ''
+
+			const talentSpecializations = talent.specializations
+				? talent.specializations.map(specialization => {
+					return new Specialization(specialization.id, specialization.name)
+				})
+				: []
 
 			if (talent.maxRaw) {
-				return new Talent(talent.id, talent.name, TalentMaxType.Raw, talent.maxRaw)
+				return new Talent(talent.id, talent.name, specializationName, talentSpecializations, TalentMaxType.Raw, talent.maxRaw)
 			} else if (talent.maxCharacteristicId) {
 				const talentCharacteritic = this.getCharacteristic(talent.maxCharacteristicId)
 				if (!talentCharacteritic) throw new Error(`Unknown characteristic: ${talent.maxCharacteristicId}`)
 
-				return new Talent(talent.id, talent.name, TalentMaxType.Characteristic, talentCharacteritic)
+				return new Talent(talent.id, talent.name, specializationName, talentSpecializations, TalentMaxType.Characteristic, talentCharacteritic)
 			} else if (talent.maxText) {
-				return new Talent(talent.id, talent.name, TalentMaxType.Text, talent.maxText)
+				return new Talent(talent.id, talent.name, specializationName, talentSpecializations, TalentMaxType.Text, talent.maxText)
 			} else {
-				return new Talent(talent.id, talent.name, TalentMaxType.None)
+				return new Talent(talent.id, talent.name, specializationName, talentSpecializations, TalentMaxType.None)
 			}
 		})
 	}
