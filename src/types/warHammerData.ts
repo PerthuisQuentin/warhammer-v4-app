@@ -14,11 +14,17 @@ export interface StatusJson {
 	standing: number
 } 
 
+export interface EvolutionTalentJson {
+	talentId: string
+	specializationIds?: string[]
+}
+
 export interface EvolutionJson {
 	name: string
 	status: StatusJson
 	characteristics: string[]
 	skills: string[]
+	talents: EvolutionTalentJson[]
 }
 
 export interface CareerJson {

@@ -3,7 +3,7 @@ import {
 	Category,
 	Characteristic,
 	Evolution,
-	Identifiable,
+	EvolutionTalent,
 	Race,
 	Skill,
 	Specialization,
@@ -24,6 +24,7 @@ import {
 	TalentSearchCriteria,
 	TierJson,
 } from 'types'
+import { buildMap } from 'utils'
 
 import characteristicsFile from '../../data/characteristics.json'
 import racesFile from '../../data/races.json'
@@ -65,35 +66,35 @@ export default class WarHammer {
 
 	constructor() {
 		this._characteristics = characteristicsJson.map(characteristic => new Characteristic(characteristic.id, characteristic.name))
-		this._characteristicsById = this.buildMap(this._characteristics)
+		this._characteristicsById = buildMap(this._characteristics)
 
 		this._races = racesJson.map(race => new Race(race.id, race.name))
-		this._racesById = this.buildMap(this._races)
+		this._racesById = buildMap(this._races)
 
 		this._tiers = tiersJson.map(tier => new Tier(tier.id, tier.name))
-		this._tiersById = this.buildMap(this._tiers)
+		this._tiersById = buildMap(this._tiers)
 
 		this._categories = categoriesJson.map(category => new Category(category.id, category.name))
-		this._categoriesById = this.buildMap(this._categories)
-
-		this._careers = this.buildCareers(careersJson)
-		this._careersById = this.buildMap(this._careers)
+		this._categoriesById = buildMap(this._categories)
 
 		this._skills = this.buildSkills(skillsJson)
-		this._skillsById = this.buildMap(this._skills)
+		this._skillsById = buildMap(this._skills)
 
 		this._talents = this.buildTalents(talentsJson)
-		this._talentsById = this.buildMap(this._talents)
+		this._talentsById = buildMap(this._talents)
+
+		this._careers = this.buildCareers(careersJson)
+		this._careersById = buildMap(this._careers)
 	}
 
 	private buildCareers(careers: CareerJson[]): Career[] {
 		return careers.map(career => {
 			const careerCategory = this.getCategory(career.category)
-			if (!careerCategory) throw new Error(`Unknown category: ${career.category}`)
+			if (!careerCategory) throw new Error(`Unknown category ${career.category}`)
 
 			const careerRaces = career.races.map(race => {
 				const careerRace = this.getRace(race)
-				if (!careerRace) throw new Error(`Unknown race: ${race}`)
+				if (!careerRace) throw new Error(`Unknown race ${race}`)
 				return careerRace
 			})
 
@@ -112,11 +113,28 @@ export default class WarHammer {
 
 			const evolutionCharacteristics = evolution.characteristics.map(characteristic => {
 				const evolutionCharacteristic = this.getCharacteristic(characteristic)
-				if (!evolutionCharacteristic) throw new Error(`Unknown characteristic: ${characteristic}`)
+				if (!evolutionCharacteristic) throw new Error(`Unknown characteristic ${characteristic}`)
 				return evolutionCharacteristic
 			})
 
-			return new Evolution(evolution.name, evolutionStatus, evolutionCharacteristics)
+			const evolutionTalents = evolution.talents.map(talent => {
+				const evolutionTalent = this.getTalent(talent.talentId)
+				if (!evolutionTalent) throw new Error(`Unknown talent: ${talent.talentId}`)
+
+				if (!talent.specializationIds) {
+					return new EvolutionTalent(evolutionTalent)
+				}
+
+				const evolutionTalentSpecializations = talent.specializationIds.map(specializationId => {
+					const specialization = evolutionTalent.getSpecialization(specializationId)
+					if (!specialization) throw new Error(`Unknown specialization ${specializationId} for talent ${talent.talentId}`)
+					return specialization
+				})
+
+				return new EvolutionTalent(evolutionTalent, evolutionTalentSpecializations)
+			})
+
+			return new Evolution(evolution.name, evolutionStatus, evolutionCharacteristics, evolutionTalents)
 		})
 	}
 
@@ -124,7 +142,7 @@ export default class WarHammer {
 		return skills
 			.map(skill => {
 				const skillCharacteristic = this.getCharacteristic(skill.characteristic)
-				if (!skillCharacteristic) throw new Error(`Unknown characteristic: ${skill.characteristic}`)
+				if (!skillCharacteristic) throw new Error(`Unknown characteristic ${skill.characteristic}`)
 
 				const skillSpecializations = skill.specializations
 					.map(specialization => {
@@ -154,7 +172,7 @@ export default class WarHammer {
 					return new Talent(talent.id, talent.name, specializationName, talentSpecializations, TalentMaxType.Raw, talent.maxRaw)
 				} else if (talent.maxCharacteristicId) {
 					const talentCharacteritic = this.getCharacteristic(talent.maxCharacteristicId)
-					if (!talentCharacteritic) throw new Error(`Unknown characteristic: ${talent.maxCharacteristicId}`)
+					if (!talentCharacteritic) throw new Error(`Unknown characteristic ${talent.maxCharacteristicId}`)
 
 					return new Talent(talent.id, talent.name, specializationName, talentSpecializations, TalentMaxType.Characteristic, talentCharacteritic)
 				} else if (talent.maxText) {
@@ -164,12 +182,6 @@ export default class WarHammer {
 				}
 			})
 			.sort((talentA, talentB) => talentA.name.localeCompare(talentB.name))
-	}
-
-	private buildMap(list: Identifiable[]) {
-		const map = new Map()
-		list.forEach(item => map.set(item.id, item))
-		return map
 	}
 
 	get characteristics(): Characteristic[] {

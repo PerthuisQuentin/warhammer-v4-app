@@ -1,6 +1,6 @@
 import { NextPage } from 'next'
 
-import { Evolution as EvolutionModel } from 'models'
+import { Evolution as EvolutionModel, Specialization } from 'models'
 import { Status } from 'components'
 
 interface Props {
@@ -10,6 +10,20 @@ interface Props {
 const Evolution: NextPage<Props> = ({ evolution }) => {
 	const characteristics = evolution.characteristics
 		.map(characteristic => characteristic.name)
+		.join(', ')
+
+	const talents = evolution.talents
+		.map(talent => {
+			if (!talent.specialized) return talent.name
+			
+			if (!talent.definedSpecialization) return `${talent.name} (Au choix)`
+
+			const specializations = talent.specializations!
+				.map(specialization => specialization.name)
+				.join(' ou ')
+
+			return `${talent.name} (${specializations})`
+		})
 		.join(', ')
 
 	return (
@@ -23,6 +37,10 @@ const Evolution: NextPage<Props> = ({ evolution }) => {
 			<div>
 				<span className='text-l font-bold'>Caractéristiques : </span>
 				<span>{characteristics}</span>
+			</div>
+			<div>
+				<span className='text-l font-bold'>Talents : </span>
+				<span>{talents}</span>
 			</div>
 		</div>
 	)

@@ -1,4 +1,4 @@
-import { Status, Characteristic } from 'models'
+import { Status, Characteristic, EvolutionTalent } from 'models'
 
 export default class Evolution {
     private _name: string
@@ -6,13 +6,15 @@ export default class Evolution {
 
 	private _status: Status
 	private _characteristics: Characteristic[]
+	private _talents: EvolutionTalent[]
 
-    constructor(name: string, status: Status, characteristics: Characteristic[]) {
+    constructor(name: string, status: Status, characteristics: Characteristic[], talents: EvolutionTalent[]) {
         this._name = name
         this._lowerCaseName = name.toLowerCase()
 		
 		this._status = status
 		this._characteristics = characteristics
+		this._talents = talents
     }
 
     get name(): string {
@@ -25,6 +27,10 @@ export default class Evolution {
 
 	get characteristics(): Characteristic[] {
 		return this._characteristics
+	}
+
+	get talents(): EvolutionTalent[] {
+		return this._talents
 	}
 
 	nameContains(search: string) {

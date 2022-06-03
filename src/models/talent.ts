@@ -1,11 +1,13 @@
 import { Identifiable, Characteristic, Specialization } from 'models'
 import { TalentMaxType } from 'types'
+import { buildMap } from 'utils'
 
 export default class Talent extends Identifiable {
 	private _name: string
 	private _lowerCaseName: string
 	private _specializationName: string
 	private _specializations: Specialization[]
+	private _specializationsById: Map<string, Specialization>
 	private _maxType: TalentMaxType
 	private _maxRaw?: number
 	private _maxCharacteristic?: Characteristic
@@ -55,6 +57,7 @@ export default class Talent extends Identifiable {
 		this._lowerCaseName = name.toLowerCase()
 		this._specializationName = specializationName
 		this._specializations = specializations
+		this._specializationsById = buildMap(this._specializations)
 		this._maxType = maxType
 
 		switch (maxType) {
@@ -84,6 +87,10 @@ export default class Talent extends Identifiable {
 
 	get specializations(): Specialization[] {
 		return this._specializations
+	}
+
+	public getSpecialization(id: string): Specialization | undefined {
+		return this._specializationsById.get(id)
 	}
 
 	get specialized(): boolean {
