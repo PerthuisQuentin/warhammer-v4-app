@@ -25,6 +25,7 @@ export interface EvolutionJson {
 	characteristics: string[]
 	skills: string[]
 	talents: EvolutionTalentJson[]
+	possessions: string[]
 }
 
 export interface CareerJson {

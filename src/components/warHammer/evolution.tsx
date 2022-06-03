@@ -1,6 +1,6 @@
 import { NextPage } from 'next'
 
-import { Evolution as EvolutionModel, Specialization } from 'models'
+import { Evolution as EvolutionModel } from 'models'
 import { Status } from 'components'
 
 interface Props {
@@ -26,6 +26,9 @@ const Evolution: NextPage<Props> = ({ evolution }) => {
 		})
 		.join(', ')
 
+	const possessions = evolution.possessions
+		.join(', ')
+
 	return (
 		<div className='flex flex-col p-4 my-2 rounded-lg border bg-gray-700 border-gray-600'>
 			<div className='flex items-center justify-between mb-2'>
@@ -41,6 +44,10 @@ const Evolution: NextPage<Props> = ({ evolution }) => {
 			<div>
 				<span className='text-l font-bold'>Talents : </span>
 				<span>{talents}</span>
+			</div>
+			<div>
+				<span className='text-l font-bold'>Possessions : </span>
+				<span>{possessions}</span>
 			</div>
 		</div>
 	)

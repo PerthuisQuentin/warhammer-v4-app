@@ -7,14 +7,16 @@ export default class Evolution {
 	private _status: Status
 	private _characteristics: Characteristic[]
 	private _talents: EvolutionTalent[]
+	private _possessions: string[]
 
-    constructor(name: string, status: Status, characteristics: Characteristic[], talents: EvolutionTalent[]) {
+    constructor(name: string, status: Status, characteristics: Characteristic[], talents: EvolutionTalent[], possessions: string[]) {
         this._name = name
         this._lowerCaseName = name.toLowerCase()
 		
 		this._status = status
 		this._characteristics = characteristics
 		this._talents = talents
+		this._possessions = possessions
     }
 
     get name(): string {
@@ -31,6 +33,10 @@ export default class Evolution {
 
 	get talents(): EvolutionTalent[] {
 		return this._talents
+	}
+
+	get possessions(): string[] {
+		return this._possessions
 	}
 
 	nameContains(search: string) {

@@ -134,7 +134,7 @@ export default class WarHammer {
 				return new EvolutionTalent(evolutionTalent, evolutionTalentSpecializations)
 			})
 
-			return new Evolution(evolution.name, evolutionStatus, evolutionCharacteristics, evolutionTalents)
+			return new Evolution(evolution.name, evolutionStatus, evolutionCharacteristics, evolutionTalents, evolution.possessions)
 		})
 	}
 
