@@ -40,6 +40,12 @@ const Talent: NextPage<Props> = ({ talent }) => {
 				<span className='font-bold'>Max : </span>
 				<span>{maxText}</span>
 			</div>
+			{talent.tests && (
+				<div className='text-gray-400'>
+					<span className='font-bold'>Tests : </span>
+					<span>{talent.tests}</span>
+				</div>
+			)}
 			<div className='my-2'>
 				{talent.description}
 			</div>

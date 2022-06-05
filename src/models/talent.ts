@@ -5,6 +5,7 @@ import { buildMap } from 'utils'
 export default class Talent extends Identifiable {
 	private _name: string
 	private _lowerCaseName: string
+	private _tests?: string
 	private _description: string
 	private _specializationName?: string
 	private _specializations: Specialization[]
@@ -18,6 +19,7 @@ export default class Talent extends Identifiable {
         super(talentPayload.id)
         this._name = talentPayload.name
 		this._lowerCaseName = talentPayload.name.toLowerCase()
+		this._tests = talentPayload.tests
 		this._description = talentPayload.description
 		this._specializationName = talentPayload.specializationName
 		this._specializations = talentPayload.specializations
@@ -34,6 +36,10 @@ export default class Talent extends Identifiable {
 
 	nameContains(search: string) {
 		return this._lowerCaseName.includes(search)
+	}
+
+	get tests(): string | undefined {
+		return this._tests
 	}
 
 	get description(): string {
