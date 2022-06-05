@@ -12,6 +12,20 @@ const Evolution: NextPage<Props> = ({ evolution }) => {
 		.map(characteristic => characteristic.name)
 		.join(', ')
 
+	const skills = evolution.skills
+		.map(skill => {
+			if (!skill.grouped) return skill.name
+			
+			if (!skill.definedSpecialization) return `${skill.name} (Au choix)`
+
+			const specializations = skill.specializations!
+				.map(specialization => specialization.name)
+				.join(' ou ')
+
+			return `${skill.name} (${specializations})`
+		})
+		.join(', ')
+
 	const talents = evolution.talents
 		.map(talent => {
 			if (!talent.specialized) return talent.name
@@ -40,6 +54,10 @@ const Evolution: NextPage<Props> = ({ evolution }) => {
 			<div>
 				<span className='text-l font-bold'>Caractéristiques : </span>
 				<span>{characteristics}</span>
+			</div>
+			<div>
+				<span className='text-l font-bold'>Compétences : </span>
+				<span>{skills}</span>
 			</div>
 			<div>
 				<span className='text-l font-bold'>Talents : </span>

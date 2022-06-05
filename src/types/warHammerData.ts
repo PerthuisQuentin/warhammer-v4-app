@@ -15,7 +15,12 @@ export interface StatusJson {
 } 
 
 export interface EvolutionTalentJson {
-	talentId: string
+	id: string
+	specializationIds?: string[]
+}
+
+export interface EvolutionSkillJson {
+	id: string
 	specializationIds?: string[]
 }
 
@@ -23,7 +28,7 @@ export interface EvolutionJson {
 	name: string
 	status: StatusJson
 	characteristics: string[]
-	skills: string[]
+	skills: EvolutionSkillJson[]
 	talents: EvolutionTalentJson[]
 	possessions: string[]
 }

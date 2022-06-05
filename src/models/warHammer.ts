@@ -3,6 +3,7 @@ import {
 	Category,
 	Characteristic,
 	Evolution,
+	EvolutionSkill,
 	EvolutionTalent,
 	Race,
 	Skill,
@@ -117,9 +118,26 @@ export default class WarHammer {
 				return evolutionCharacteristic
 			})
 
+			const evolutionSkills = evolution.skills.map(skill => {
+				const evolutionSkill = this.getSkill(skill.id)
+				if (!evolutionSkill) throw new Error(`Unknown skill ${skill.id}`)
+
+				if (!skill.specializationIds) {
+					return new EvolutionSkill(evolutionSkill)
+				}
+
+				const evolutionSkillSpecializations = skill.specializationIds.map(specializationId => {
+					const specialization = evolutionSkill.getSpecialization(specializationId)
+					if (!specialization) throw new Error(`Unknown specialization ${specializationId} for talent ${skill.id}`)
+					return specialization
+				})
+
+				return new EvolutionSkill(evolutionSkill, evolutionSkillSpecializations)
+			})
+
 			const evolutionTalents = evolution.talents.map(talent => {
-				const evolutionTalent = this.getTalent(talent.talentId)
-				if (!evolutionTalent) throw new Error(`Unknown talent: ${talent.talentId}`)
+				const evolutionTalent = this.getTalent(talent.id)
+				if (!evolutionTalent) throw new Error(`Unknown talent: ${talent.id}`)
 
 				if (!talent.specializationIds) {
 					return new EvolutionTalent(evolutionTalent)
@@ -127,14 +145,14 @@ export default class WarHammer {
 
 				const evolutionTalentSpecializations = talent.specializationIds.map(specializationId => {
 					const specialization = evolutionTalent.getSpecialization(specializationId)
-					if (!specialization) throw new Error(`Unknown specialization ${specializationId} for talent ${talent.talentId}`)
+					if (!specialization) throw new Error(`Unknown specialization ${specializationId} for talent ${talent.id}`)
 					return specialization
 				})
 
 				return new EvolutionTalent(evolutionTalent, evolutionTalentSpecializations)
 			})
 
-			return new Evolution(evolution.name, evolutionStatus, evolutionCharacteristics, evolutionTalents, evolution.possessions)
+			return new Evolution(evolution.name, evolutionStatus, evolutionCharacteristics, evolutionSkills, evolutionTalents, evolution.possessions)
 		})
 	}
 

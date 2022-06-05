@@ -10,6 +10,7 @@ export { default as Skill } from './skill'
 export { default as Status } from './status'
 
 export { default as EvolutionTalent } from './evolutionTalent'
+export { default as EvolutionSkill } from './evolutionSkill'
 
 export { default as Career } from './career'
 export { default as Evolution } from './evolution'

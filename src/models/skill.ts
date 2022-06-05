@@ -1,4 +1,5 @@
 import { Identifiable, Characteristic, Specialization } from 'models'
+import { buildMap } from 'utils'
 
 export default class Skill extends Identifiable {
 	private _name: string
@@ -7,6 +8,7 @@ export default class Skill extends Identifiable {
 	private _base: boolean
 	private _specializationMandatory: boolean
 	private _specializations: Specialization[]
+	private _specializationsById: Map<string, Specialization>
 
     constructor(
 		id: string,
@@ -23,6 +25,7 @@ export default class Skill extends Identifiable {
 		this._base = base
 		this._specializationMandatory = specializationMandatory
 		this._specializations = specializations
+		this._specializationsById = buildMap(this._specializations)
     }
 
 	get name(): string {
@@ -47,6 +50,10 @@ export default class Skill extends Identifiable {
 
 	get specializations(): Specialization[] {
 		return this._specializations
+	}
+
+	public getSpecialization(id: string): Specialization | undefined {
+		return this._specializationsById.get(id)
 	}
 
 	specializationNamesContains(search: string) {
