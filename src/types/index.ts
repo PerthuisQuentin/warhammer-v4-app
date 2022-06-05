@@ -14,4 +14,9 @@ export type {
 	TalentJson,
 	TierJson,
 } from './warHammerData'
-export { TalentMaxType } from './talents'
+export {
+	TalentMaxType,
+} from './talents'
+export type {
+	TalentPayload,
+} from './talents'

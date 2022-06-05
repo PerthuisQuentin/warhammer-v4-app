@@ -53,6 +53,8 @@ export interface SkillJson {
 export interface TalentJson {
 	id: string
 	name: string
+	tests?: string
+	description: string
 	maxRaw?: number
 	maxCharacteristicId?: string
 	maxText?: string

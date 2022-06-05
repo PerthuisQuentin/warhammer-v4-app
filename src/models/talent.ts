@@ -1,11 +1,12 @@
 import { Identifiable, Characteristic, Specialization } from 'models'
-import { TalentMaxType } from 'types'
+import { TalentMaxType, TalentPayload } from 'types'
 import { buildMap } from 'utils'
 
 export default class Talent extends Identifiable {
 	private _name: string
 	private _lowerCaseName: string
-	private _specializationName: string
+	private _description: string
+	private _specializationName?: string
 	private _specializations: Specialization[]
 	private _specializationsById: Map<string, Specialization>
 	private _maxType: TalentMaxType
@@ -13,64 +14,18 @@ export default class Talent extends Identifiable {
 	private _maxCharacteristic?: Characteristic
 	private _maxText?: string
 
-	constructor(
-		id: string,
-		name: string,
-		specializationName: string,
-		specializations: Specialization[],
-		maxType: TalentMaxType.Raw,
-		maxRaw: number
-	)
-	constructor(
-		id: string,
-		name: string,
-		specializationName: string,
-		specializations: Specialization[],
-		maxType: TalentMaxType.Characteristic,
-		maxCharacteristic: Characteristic
-	)
-	constructor(
-		id: string,
-		name: string,
-		specializationName: string,
-		specializations: Specialization[],
-		maxType: TalentMaxType.Text,
-		maxText: string
-	)
-	constructor(
-		id: string,
-		name: string,
-		specializationName: string,
-		specializations: Specialization[],
-		maxType: TalentMaxType.None
-	)
-    constructor(
-		id: string,
-		name: string,
-		specializationName: string,
-		specializations: Specialization[],
-		maxType: TalentMaxType,
-		maxValue?: number | string | Characteristic
-	) {
-        super(id)
-        this._name = name
-		this._lowerCaseName = name.toLowerCase()
-		this._specializationName = specializationName
-		this._specializations = specializations
+    constructor(talentPayload: TalentPayload) {
+        super(talentPayload.id)
+        this._name = talentPayload.name
+		this._lowerCaseName = talentPayload.name.toLowerCase()
+		this._description = talentPayload.description
+		this._specializationName = talentPayload.specializationName
+		this._specializations = talentPayload.specializations
 		this._specializationsById = buildMap(this._specializations)
-		this._maxType = maxType
-
-		switch (maxType) {
-			case TalentMaxType.Raw:
-				this._maxRaw = maxValue as number
-				break;
-			case TalentMaxType.Characteristic:
-					this._maxCharacteristic = maxValue as Characteristic
-					break;
-			case TalentMaxType.Text:
-				this._maxText = maxValue as string
-				break;
-		}
+		this._maxType = talentPayload.maxType
+		this._maxRaw = talentPayload.maxRaw
+		this._maxCharacteristic = talentPayload.maxCharacteristic
+		this._maxText = talentPayload.maxText
     }
 
 	get name(): string {
@@ -81,7 +36,11 @@ export default class Talent extends Identifiable {
 		return this._lowerCaseName.includes(search)
 	}
 
-	get specializationName(): string {
+	get description(): string {
+		return this._description
+	}
+
+	get specializationName(): string | undefined {
 		return this._specializationName
 	}
 

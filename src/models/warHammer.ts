@@ -22,6 +22,7 @@ import {
 	SkillSearchCriteria,
 	TalentJson,
 	TalentMaxType,
+	TalentPayload,
 	TalentSearchCriteria,
 	TierJson,
 } from 'types'
@@ -186,18 +187,31 @@ export default class WarHammer {
 						.sort((specializationA, specializationB) => specializationA.name.localeCompare(specializationB.name))
 					: []
 
+				const talentPayload: TalentPayload = {
+					id: talent.id,
+					name: talent.name,
+					description: talent.description,
+					tests: talent.tests,
+					specializationName: talent.specializationName,
+					specializations: talentSpecializations,
+					maxType: TalentMaxType.None
+				}
+
 				if (talent.maxRaw) {
-					return new Talent(talent.id, talent.name, specializationName, talentSpecializations, TalentMaxType.Raw, talent.maxRaw)
+					talentPayload.maxType = TalentMaxType.Raw
+					talentPayload.maxRaw = talent.maxRaw
 				} else if (talent.maxCharacteristicId) {
 					const talentCharacteritic = this.getCharacteristic(talent.maxCharacteristicId)
 					if (!talentCharacteritic) throw new Error(`Unknown characteristic ${talent.maxCharacteristicId}`)
 
-					return new Talent(talent.id, talent.name, specializationName, talentSpecializations, TalentMaxType.Characteristic, talentCharacteritic)
+					talentPayload.maxType = TalentMaxType.Characteristic
+					talentPayload.maxCharacteristic = talentCharacteritic
 				} else if (talent.maxText) {
-					return new Talent(talent.id, talent.name, specializationName, talentSpecializations, TalentMaxType.Text, talent.maxText)
-				} else {
-					return new Talent(talent.id, talent.name, specializationName, talentSpecializations, TalentMaxType.None)
+					talentPayload.maxType = TalentMaxType.Text
+					talentPayload.maxText = talent.maxText
 				}
+
+				return new Talent(talentPayload)
 			})
 			.sort((talentA, talentB) => talentA.name.localeCompare(talentB.name))
 	}
