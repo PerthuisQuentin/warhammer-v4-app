@@ -32,7 +32,7 @@ const Talent: NextPage<Props> = ({ talent }) => {
 		.join(', ')
 
 	return (
-		<div className='flex flex-col my-6 p-4 rounded-lg border bg-gray-800 border-gray-700'>
+		<div className='w-full flex flex-col my-4 p-4 rounded-lg border bg-gray-800 border-gray-700'>
 			<span className='inline text-2xl font-bold'>
 				{talentName}
 			</span>

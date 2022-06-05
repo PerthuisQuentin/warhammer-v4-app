@@ -15,7 +15,7 @@ const Skill: NextPage<Props> = ({ skill }) => {
 		.join(', ')
 
 	return (
-		<div className='flex flex-col my-6 p-4 rounded-lg border bg-gray-800 border-gray-700'>
+		<div className='w-full flex flex-col my-4 p-4 rounded-lg border bg-gray-800 border-gray-700'>
 			<div className='flex justify-between mb-2'>
 				<div className='flex flex-col'>
 					<span className='text-2xl font-bold'>

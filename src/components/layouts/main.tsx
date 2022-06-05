@@ -14,7 +14,7 @@ const Main: NextPage = ({ children }) => {
 				<Header/>
 				<Navigation/>
 			</div>
-			<div className='w-full grow flex flex-col items-center'>
+			<div className='w-full grow flex flex-col items-center sm:w-full md:w-8/12 lg:w-6/12 p-4'>
 				{children}
 			</div>
 		</div>

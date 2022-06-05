@@ -1,4 +1,4 @@
-import { Identifiable } from "models"
+import { Identifiable } from 'models'
 
 export const buildMap = <Type>(list: Identifiable[]): Map<string, Type> => {
 	const map = new Map()

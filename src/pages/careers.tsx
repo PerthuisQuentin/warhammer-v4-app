@@ -29,8 +29,8 @@ const Careers: NextPage = () => {
 	}
 
 	return (
-		<div className='sm:w-full md:w-8/12 lg:w-6/12 p-4'>
-			<div className='flex gap-4'>
+		<>
+			<div className='w-full flex gap-4'>
 				<TextInput
 					id='careerSearchInput'
 					label='Carrière'
@@ -54,7 +54,7 @@ const Careers: NextPage = () => {
 				/>
 			</div>
 			<CareerList searchCriteria={searchCriteria} />
-		</div>
+		</>
 	)
 }
 
