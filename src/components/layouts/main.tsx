@@ -4,7 +4,13 @@ import Head from 'next/head'
 
 import { Header, Navigation } from 'components'
 
-const Main: NextPage = ({ children }) => {
+interface Props {
+	children: React.ReactNode
+}
+
+const Main: NextPage<Props> = ({
+	children,
+}) => {
 	return (
 		<div className='flex min-h-screen flex-col items-center bg-gray-900 text-white'>
 			<Head>
