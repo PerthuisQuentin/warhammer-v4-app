@@ -5,7 +5,7 @@ import { TalentList, TextInput } from 'components'
 import { TalentSearchCriteria } from 'types'
 
 const Talents: NextPage = () => {
-	const [textSearch, setTextSearch] = useState('')
+	const [textSearch, setTextSearch] = useState<string>('')
 
 	const searchCriteria: TalentSearchCriteria = {
 		search: textSearch,

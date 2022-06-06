@@ -18,9 +18,9 @@ raceOptions.unshift({
 })
 
 const Careers: NextPage = () => {
-	const [careerSearch, setCareerSearch] = useState('')
-	const [categorySearch, setCategorySearch] = useState('')
-	const [raceSelected, setRaceSelected] = useState('')
+	const [careerSearch, setCareerSearch] = useState<string>('')
+	const [categorySearch, setCategorySearch] = useState<string>('')
+	const [raceSelected, setRaceSelected] = useState<string>('')
 
 	const searchCriteria: CareerSearchCriteria = {
 		career: careerSearch,

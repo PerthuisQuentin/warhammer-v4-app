@@ -16,11 +16,11 @@ const TextInput: NextPage<Props> = ({
 	onChange
 }) => {
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		if (onChange) onChange(event.target.value)
+		onChange && onChange(event.target.value)
 	}
 
 	return (
-		<div className='w-full py-2'>
+		<div className='w-full'>
 			<label
 				htmlFor={id}
 				className='block mb-2 text-sm font-medium text-gray-300'

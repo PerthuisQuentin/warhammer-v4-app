@@ -70,7 +70,7 @@ export default class WarHammer {
 		this._characteristics = characteristicsJson.map(characteristic => new Characteristic(characteristic.id, characteristic.name))
 		this._characteristicsById = buildMap(this._characteristics)
 
-		this._races = racesJson.map(race => new Race(race.id, race.name))
+		this._races = this.buildRaces(racesJson)
 		this._racesById = buildMap(this._races)
 
 		this._tiers = tiersJson.map(tier => new Tier(tier.id, tier.name))
@@ -89,6 +89,10 @@ export default class WarHammer {
 		this._careersById = buildMap(this._careers)
 	}
 
+	private buildRaces(races: RaceJson[]): Race[] {
+		return races.map(race => new Race(race.id, race.name, race.dice100))
+	}
+
 	private buildCareers(careers: CareerJson[]): Career[] {
 		return careers.map(career => {
 			const careerCategory = this.getCategory(career.category)
@@ -102,7 +106,7 @@ export default class WarHammer {
 
 			const careerEvolutions = this.buildCareerEvolutions(career)
 
-			return new Career(career.id, career.name, careerCategory, careerRaces, careerEvolutions)
+			return new Career(career.id, career.name, careerCategory, careerRaces, career.raceDices100, careerEvolutions)
 		})
 	}
 
@@ -232,6 +236,10 @@ export default class WarHammer {
 		return this._racesById.get(id)
 	}
 
+	public getRaceByRoll(roll: number): Race | undefined {
+		return this._races.find(race => race.isRollInDice100(roll))
+	}
+
 	get tiers(): Tier[] {
 		return this._tiers
 	}
@@ -254,6 +262,10 @@ export default class WarHammer {
 
 	public getCareer(id: string): Career | undefined {
 		return this._careersById.get(id)
+	}
+
+	public getCareerByRoll(raceId: string, roll: number): Career | undefined {
+		return this._careers.find(career => career.isRollInRaceDice100(raceId, roll))
 	}
 
 	get skills(): Skill[] {
@@ -294,8 +306,8 @@ export default class WarHammer {
 
 	public getFilteredCareers(searchCriteria: CareerSearchCriteria): Career[] {
 		const criteria: CareerSearchCriteria = {
-			career: searchCriteria.career.toLowerCase(),
-			category: searchCriteria.category.toLowerCase(),
+			career: searchCriteria.career?.toLowerCase(),
+			category: searchCriteria.category?.toLowerCase(),
 			raceId: searchCriteria.raceId
 		}
 
@@ -320,7 +332,7 @@ export default class WarHammer {
 
 	public getFilteredSkills(searchCriteria: SkillSearchCriteria): Skill[] {
 		const criteria: SkillSearchCriteria = {
-			search: searchCriteria.search.toLowerCase(),
+			search: searchCriteria.search?.toLowerCase(),
 			characteristicId: searchCriteria.characteristicId
 		}
 
@@ -339,7 +351,7 @@ export default class WarHammer {
 
 	public getFilteredTalents(searchCriteria: TalentSearchCriteria): Talent[] {
 		const criteria: TalentSearchCriteria = {
-			search: searchCriteria.search.toLowerCase()
+			search: searchCriteria.search?.toLowerCase()
 		}
 
 		return this._talents

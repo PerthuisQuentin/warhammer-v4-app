@@ -18,8 +18,8 @@ characteristicOptions.unshift({
 })
 
 const Skills: NextPage = () => {
-	const [textSearch, setTextSearch] = useState('')
-	const [characteristicSelected, setCharacteristicSelected] = useState('')
+	const [textSearch, setTextSearch] = useState<string>('')
+	const [characteristicSelected, setCharacteristicSelected] = useState<string>('')
 
 	const searchCriteria: SkillSearchCriteria = {
 		search: textSearch,

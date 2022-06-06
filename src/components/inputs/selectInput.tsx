@@ -2,7 +2,7 @@ import { NextPage } from 'next'
 
 interface Props {
 	id: string
-	label: string
+	label?: string
 	value: string
 	options: {
 		value: string
@@ -19,7 +19,7 @@ const SelectInput: NextPage<Props> = ({
 	onChange
 }) => {
 	const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-		if (onChange) onChange(event.target.value)
+		onChange && onChange(event.target.value)
 	}
 
 	const optionItems = options.map(option => (
@@ -32,13 +32,15 @@ const SelectInput: NextPage<Props> = ({
 	))
 
 	return (
-		<div className='w-full py-2'>
-			<label
-				htmlFor={id}
-				className='block mb-2 text-sm font-medium text-gray-400'
-			>
-					{label}
-			</label>
+		<div className='w-full'>
+			{label && (
+				<label
+					htmlFor={id}
+					className='block mb-2 text-sm font-medium text-gray-400'
+				>
+						{label}
+				</label>
+			)}
 			<select
 				id={id}
 				className='h-10 border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500'

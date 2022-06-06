@@ -5,9 +5,12 @@ export interface IdName {
 
 export interface CharacteristicJson extends IdName {}
 export interface CategoryJson extends IdName {}
-export interface RaceJson extends IdName {}
 export interface TierJson extends IdName {}
 export interface SpecializationJson extends IdName {}
+
+export interface RaceJson extends IdName {
+	dice100: number[]
+}
 
 export interface StatusJson {
 	tier: string
@@ -38,6 +41,7 @@ export interface CareerJson {
 	name: string
 	category: string
 	races: string[]
+	raceDices100: Record<string, number[] | undefined>
 	evolutions: EvolutionJson[]
 }
 
