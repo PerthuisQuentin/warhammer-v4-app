@@ -48,6 +48,7 @@ export interface CareerJson {
 export interface SkillJson {
 	id: string
 	name: string
+	description: string
 	characteristic: string
 	base: boolean
 	specializationMandatory: boolean

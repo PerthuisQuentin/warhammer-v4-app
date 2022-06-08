@@ -4,6 +4,7 @@ import { buildMap } from 'utils'
 export default class Skill extends Identifiable {
 	private _name: string
 	private _lowerCaseName: string
+	private _description: string
 	private _characteristic: Characteristic
 	private _base: boolean
 	private _specializationMandatory: boolean
@@ -13,6 +14,7 @@ export default class Skill extends Identifiable {
     constructor(
 		id: string,
 		name: string,
+		description: string,
 		characteristic: Characteristic,
 		base: boolean,
 		specializationMandatory: boolean,
@@ -21,6 +23,7 @@ export default class Skill extends Identifiable {
         super(id)
         this._name = name
 		this._lowerCaseName = name.toLowerCase()
+		this._description = description
 		this._characteristic = characteristic
 		this._base = base
 		this._specializationMandatory = specializationMandatory
@@ -34,6 +37,10 @@ export default class Skill extends Identifiable {
 
 	nameContains(search: string) {
 		return this._lowerCaseName.includes(search)
+	}
+
+	get description(): string {
+		return this._description
 	}
 
 	get characteristic(): Characteristic {

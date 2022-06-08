@@ -1,6 +1,6 @@
 import { NextPage } from 'next'
 
-import { Skill as SkillModel, Specialization } from 'models'
+import { Skill as SkillModel } from 'models'
 
 interface Props {
 	skill: SkillModel
@@ -28,6 +28,9 @@ const Skill: NextPage<Props> = ({ skill }) => {
 				<span className='text-gray-400'>
 					{skill.characteristic.name}
 				</span>
+			</div>
+			<div className='my-2'>
+				{skill.description}
 			</div>
 			{skill.grouped && (
 				<div className='text-gray-200'>

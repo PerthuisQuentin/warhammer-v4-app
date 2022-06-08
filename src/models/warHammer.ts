@@ -173,7 +173,7 @@ export default class WarHammer {
 					})
 					.sort((specializationA, specializationB) => specializationA.name.localeCompare(specializationB.name))
 
-				return new Skill(skill.id, skill.name, skillCharacteristic, skill.base, skill.specializationMandatory, skillSpecializations)
+				return new Skill(skill.id, skill.name, skill.description, skillCharacteristic, skill.base, skill.specializationMandatory, skillSpecializations)
 			})
 			.sort((skillA, skillB) => skillA.name.localeCompare(skillB.name))
 	}
