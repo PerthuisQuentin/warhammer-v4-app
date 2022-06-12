@@ -12,6 +12,10 @@ const links = [
 		label: 'Carrières'
 	},
 	{
+		href: '/characteristics',
+		label: 'Caractéristiques'
+	},
+	{
 		href: '/skills',
 		label: 'Compétences'
 	},

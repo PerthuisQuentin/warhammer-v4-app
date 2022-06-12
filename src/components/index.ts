@@ -17,6 +17,8 @@ export { default as SkillFlap } from './warHammer/flaps/skillFlap'
 export { default as TalentFlap } from './warHammer/flaps/talentFlap'
 export { default as PossessionFlap } from './warHammer/flaps/possessionFlap'
 
+export { default as Characteristic } from './warHammer/characteristic'
+export { default as CharacteristicList } from './warHammer/characteristicList'
 export { default as Evolution } from './warHammer/evolution'
 export { default as Status } from './warHammer/status'
 export { default as Career } from './warHammer/career'
