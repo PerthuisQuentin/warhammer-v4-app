@@ -29,5 +29,7 @@ export { default as Talent } from './warHammer/talent'
 export { default as TalentList } from './warHammer/talentList'
 
 export { default as CreationSelectionLine } from './warHammer/characterCreation/creationSelectionLine'
+export { default as CharacteristicCreation } from './warHammer/characterCreation/characteristicCreation'
 export { default as RaceSelection } from './warHammer/characterCreation/raceSelection'
 export { default as CareerSelection } from './warHammer/characterCreation/careerSelection'
+export { default as CharacteristicSelection } from './warHammer/characterCreation/characteristicSelection'

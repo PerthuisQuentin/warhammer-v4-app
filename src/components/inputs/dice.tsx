@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import Random from 'random'
 
 interface Props {
+	className?: string
 	value?: number
 	max: number
 	oneRoll?: boolean
@@ -10,6 +11,7 @@ interface Props {
 }
 
 const Dice: NextPage<Props> = ({
+	className,
 	value,
 	max,
 	oneRoll = false,
@@ -56,7 +58,7 @@ const Dice: NextPage<Props> = ({
 
 	return (
 		<div
-			className={`w-12 h-12 flex justify-center items-center border-2 rounded-lg font-bold text-2xl cursor-pointer ${colorsStyle} ${disabledStyle}`}	
+			className={`w-12 h-12 flex justify-center items-center border-2 rounded-lg font-bold text-2xl cursor-pointer ${colorsStyle} ${disabledStyle} ${className}`}	
 			onClick={onClick}
 		>
 			{isRolling ? rollingNumber : (value ?? max)}

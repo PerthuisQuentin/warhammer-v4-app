@@ -3,13 +3,17 @@ export interface IdName {
 	name: string
 }
 
-export interface CharacteristicJson extends IdName {}
+export interface CharacteristicJson extends IdName {
+	abbreviation: string
+}
+
 export interface CategoryJson extends IdName {}
 export interface TierJson extends IdName {}
 export interface SpecializationJson extends IdName {}
 
 export interface RaceJson extends IdName {
 	dice100: number[]
+	characteristicsBonuses: Record<string, number>
 }
 
 export interface StatusJson {

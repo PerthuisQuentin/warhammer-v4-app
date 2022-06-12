@@ -67,7 +67,7 @@ export default class WarHammer {
 	private _talentsById: Map<string, Talent>
 
 	constructor() {
-		this._characteristics = characteristicsJson.map(characteristic => new Characteristic(characteristic.id, characteristic.name))
+		this._characteristics = this.buildCharacteristics(characteristicsJson)
 		this._characteristicsById = buildMap(this._characteristics)
 
 		this._races = this.buildRaces(racesJson)
@@ -89,8 +89,16 @@ export default class WarHammer {
 		this._careersById = buildMap(this._careers)
 	}
 
+	private buildCharacteristics(characteristics: CharacteristicJson[]): Characteristic[] {
+		return characteristics.map(characteristic => new Characteristic(characteristic.id, characteristic.name, characteristic.abbreviation))
+	}
+
 	private buildRaces(races: RaceJson[]): Race[] {
-		return races.map(race => new Race(race.id, race.name, race.dice100))
+		return races.map(race => {
+			const characteristicsBonuses: Map<string, number> = new Map(Object.entries(race.characteristicsBonuses))
+
+			return new Race(race.id, race.name, race.dice100, characteristicsBonuses)
+		})
 	}
 
 	private buildCareers(careers: CareerJson[]): Career[] {

@@ -2,7 +2,7 @@ import { NextPage } from 'next'
 import { useState } from 'react'
 
 import { CreationSelectionLine, Button, SelectInput, LockOverlay } from 'components'
-import { Career } from 'models'
+import { Career, Race } from 'models'
 
 import WarHammer from 'warHammer'
 
@@ -11,16 +11,16 @@ const XP_ON_THREE_ROLLED_CAREER = 25
 const XP_ON_CHOOSED_CAREER = 0
 	
 interface Props {
-	raceId?: string
+	race?: Race
 	onCareerSelected?: (event: { career: Career, xp: number }) => void
 }
 
 const CareerSelection: NextPage<Props> = ({
-	raceId,
+	race,
 	onCareerSelected,
 }) => {
-	const [rolls, setRolls] = useState<Array<number | undefined>>([undefined, undefined, undefined])
-	const [careers, setCareers] = useState<Array<Career | undefined>>([undefined, undefined, undefined])
+	const [rolls, setRolls] = useState<Array<number | undefined>>([])
+	const [careers, setCareers] = useState<Array<Career | undefined>>([])
 
 	const [moreOptions, setMoreOptions] = useState<boolean>(false)
 	const [chooseCareer, setChooseCareer] = useState<boolean>(false)
@@ -31,9 +31,9 @@ const CareerSelection: NextPage<Props> = ({
 		const newRolls = [...rolls]
 		const newCareers = [...careers]
 
-		if (!raceId) throw new Error('No raceId')
-		const rolledCareer = WarHammer.getCareerByRoll(raceId, roll)
-		if (!rolledCareer) throw new Error(`No career on race ${raceId} and roll ${roll}`)
+		if (!race) throw new Error('No raceId')
+		const rolledCareer = WarHammer.getCareerByRoll(race.id, roll)
+		if (!rolledCareer) throw new Error(`No career on race ${race.id} and roll ${roll}`)
 
 		newRolls[index] = roll
 		newCareers[index] = rolledCareer
@@ -62,7 +62,7 @@ const CareerSelection: NextPage<Props> = ({
 		})
 	}
 
-	const careerOptions = WarHammer.getFilteredCareers({ raceId })
+	const careerOptions = WarHammer.getFilteredCareers({ raceId: race!.id })
 		.map(career => ({
 			label: career.name,
 			value: career.id

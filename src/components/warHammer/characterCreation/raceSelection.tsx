@@ -22,8 +22,8 @@ interface Props {
 const RaceSelection: NextPage<Props> = ({
 	onRaceSelected,
 }) => {
-	const [roll, setRoll] = useState<number | undefined>(undefined)
-	const [race, setRace] = useState<Race | undefined>(undefined)
+	const [roll, setRoll] = useState<number | undefined>()
+	const [race, setRace] = useState<Race | undefined>()
 
 	const [chooseRace, setChooseRace] = useState<boolean>(false)
 	

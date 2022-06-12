@@ -1,8 +1,16 @@
 import type { NextPage } from 'next'
 import { useState } from 'react'
 
-import { CareerSelection, RaceSelection, StepsLine } from 'components'
-import { Race, Career } from 'models'
+import {
+	CareerSelection,
+	CharacteristicSelection,
+	RaceSelection,
+	StepsLine,
+} from 'components'
+import {
+	Career,
+	Race,
+} from 'models'
 
 const CharacterCreation: NextPage = () => {
 	const [currentStep, setCurrentStep] = useState<number>(1)
@@ -26,7 +34,7 @@ const CharacterCreation: NextPage = () => {
 	return (
 		<div className='w-full flex flex-col'>
 			<StepsLine
-				steps={3}
+				steps={4}
 				currentStep={currentStep}
 				className='mb-8'
 			/>
@@ -37,11 +45,16 @@ const CharacterCreation: NextPage = () => {
 			)}
 			{currentStep === 2 && (
 				<CareerSelection
-					raceId={selectedRace!.id}
+					race={selectedRace}
 					onCareerSelected={selectCareer}
 				/>
 			)}
 			{currentStep === 3 && (
+				<CharacteristicSelection
+					race={selectedRace}
+				/>
+			)}
+			{currentStep === 4 && (
 				<div className='flex flex-col justify-center items-center'>
 					<span className='text-xl font-bold mb-4'>Fin ! (Pour le moment)</span>
 					<span className='text-xl font-bold my-4'>+{totalXP} PX</span>
