@@ -1,7 +1,7 @@
 import { NextPage } from 'next'
 
 import { Evolution as EvolutionModel } from 'models'
-import { Status } from 'components'
+import { Status, CharacteristicFlap, SkillFlap, TalentFlap, PossessionFlap } from 'components'
 
 interface Props {
 	evolution: EvolutionModel
@@ -9,39 +9,36 @@ interface Props {
 
 const Evolution: NextPage<Props> = ({ evolution }) => {
 	const characteristics = evolution.characteristics
-		.map(characteristic => characteristic.name)
-		.join(', ')
+		.map(characteristic => (
+			<CharacteristicFlap
+				key={characteristic.id}
+				characteristic={characteristic}
+			/>
+		))
 
 	const skills = evolution.skills
-		.map(skill => {
-			if (!skill.grouped) return skill.name
-			
-			if (!skill.definedSpecialization) return `${skill.name} (Au choix)`
-
-			const specializations = skill.specializations!
-				.map(specialization => specialization.name)
-				.join(' ou ')
-
-			return `${skill.name} (${specializations})`
-		})
-		.join(', ')
+		.map((evolutionSkill, index) => (
+			<SkillFlap
+				key={`${evolutionSkill.skill.id}-${index}`}
+				evolutionSkill={evolutionSkill}
+			/>
+		))
 
 	const talents = evolution.talents
-		.map(talent => {
-			if (!talent.specialized) return talent.name
-			
-			if (!talent.definedSpecialization) return `${talent.name} (Au choix)`
-
-			const specializations = talent.specializations!
-				.map(specialization => specialization.name)
-				.join(' ou ')
-
-			return `${talent.name} (${specializations})`
-		})
-		.join(', ')
+		.map((evolutionTalent, index) => (
+			<TalentFlap
+				key={`${evolutionTalent.talent.id}-${index}`}
+				evolutionTalent={evolutionTalent}
+			/>
+		))
 
 	const possessions = evolution.possessions
-		.join(', ')
+		.map(possession => (
+			<PossessionFlap
+				key={possession}
+				possession={possession}
+			/>
+		))
 
 	return (
 		<div className='flex flex-col p-4 my-2 rounded-lg border bg-gray-700 border-gray-600'>
@@ -51,21 +48,25 @@ const Evolution: NextPage<Props> = ({ evolution }) => {
 				</span>
 				<Status status={evolution.status} />
 			</div>
-			<div>
-				<span className='text-l font-bold'>Caractéristiques : </span>
-				<span>{characteristics}</span>
+			<span className='text-l'>Caractéristiques</span>
+			<hr className='w-full h-px border-none bg-gray-500 mb-2'/>
+			<div className='flex flex-wrap gap-1'>
+				{characteristics}
 			</div>
-			<div>
-				<span className='text-l font-bold'>Compétences : </span>
-				<span>{skills}</span>
+			<span className='text-l mt-2'>Compétences</span>
+			<hr className='w-full h-px border-none bg-gray-500 mb-2'/>
+			<div className='flex flex-wrap gap-1'>
+				{skills}
 			</div>
-			<div>
-				<span className='text-l font-bold'>Talents : </span>
-				<span>{talents}</span>
+			<span className='text-l mt-2'>Talents</span>
+			<hr className='w-full h-px border-none bg-gray-500 mb-2'/>
+			<div className='flex flex-wrap gap-1'>
+				{talents}
 			</div>
-			<div>
-				<span className='text-l font-bold'>Possessions : </span>
-				<span>{possessions}</span>
+			<span className='text-l mt-2'>Possessions</span>
+			<hr className='w-full h-px border-none bg-gray-500 mb-2'/>
+			<div className='flex flex-wrap gap-1'>
+				{possessions}
 			</div>
 		</div>
 	)

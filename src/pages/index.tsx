@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router';
 
-import { Button } from 'components'
+import { Button, Flap } from 'components'
 
 const Home: NextPage = () => {
 	const router = useRouter();
@@ -14,6 +14,10 @@ const Home: NextPage = () => {
 			>
 				Créer un personnage
 			</Button>
+			<Flap
+				label='Coucou'
+				secondaryLabel='test'
+			/>
 		</div>
 	)
 }

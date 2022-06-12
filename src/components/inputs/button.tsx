@@ -20,7 +20,7 @@ const TextInput: NextPage<Props> = ({
 	return (
 		<button
 			type='button'
-			className={`text-white font-medium rounded-lg text-sm px-5 py-2.5 ${style}`}
+			className={`text-white rounded-lg px-5 py-2.5 ${style}`}
 			disabled={disabled}
 			onClick={onClick}
 			ref={innerRef}
