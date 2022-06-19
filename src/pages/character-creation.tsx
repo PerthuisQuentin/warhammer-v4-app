@@ -11,6 +11,9 @@ import {
 	Career,
 	Race,
 } from 'models'
+import { useMap } from 'hooks'
+
+import WarHammer from 'warHammer'
 
 const CharacterCreation: NextPage = () => {
 	const [currentStep, setCurrentStep] = useState<number>(1)
@@ -18,6 +21,7 @@ const CharacterCreation: NextPage = () => {
 	const [totalXP, setTotalXP] = useState<number>(0)
 	const [selectedRace, setSelectedRace] = useState<Race | undefined>()
 	const [selectedCareer, setSelectedCareer] = useState<Career | undefined>()
+	const [selectedCharacteristics, { setAll: setSelectedCharacteristics }] = useMap<string, number>()
 
 	const selectRace = (event: { race: Race, xp: number }) => {
 		setCurrentStep(2)
@@ -29,6 +33,15 @@ const CharacterCreation: NextPage = () => {
 		setCurrentStep(3)
 		setTotalXP(totalXP + event.xp)
 		setSelectedCareer(event.career)
+	}
+
+	const selectCharacteristics = (event: {
+		characteristics: ReadonlyMap<string, number>,
+		xp: number,
+	}) => {
+		setCurrentStep(4)
+		setTotalXP(totalXP + event.xp)
+		setSelectedCharacteristics(event.characteristics)
 	}
 
 	return (
@@ -52,6 +65,7 @@ const CharacterCreation: NextPage = () => {
 			{currentStep === 3 && (
 				<CharacteristicSelection
 					race={selectedRace}
+					onCharacteristicsSelected={selectCharacteristics}
 				/>
 			)}
 			{currentStep === 4 && (
@@ -60,6 +74,25 @@ const CharacterCreation: NextPage = () => {
 					<span className='text-xl font-bold my-4'>+{totalXP} PX</span>
 					<span className='text-lg my-2'>{selectedRace!.name}</span>
 					<span className='text-lg my-2'>{selectedCareer!.name}</span>
+					<div className='w-full flex justify-between'>
+						{WarHammer.characteristics.map(characteristic => {
+							const characteristicValue = selectedCharacteristics.get(characteristic.id)!
+							const characteristicBonus = selectedRace!.getCharacteristicBonus(characteristic.id)!
+							return (
+								<div
+									key={characteristic.id}
+									className='w-10 flex flex-col items-center'
+								>
+									<span className='font-bold text-xl'>
+										{characteristic.abbreviation}
+									</span>
+									<span className='text-xl'>
+										{characteristicValue + characteristicBonus}
+									</span>
+								</div>
+							)
+						})}
+					</div>
 				</div>
 			)}
 		</div>

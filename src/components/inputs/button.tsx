@@ -2,6 +2,7 @@ import { NextPage } from 'next'
 
 interface Props {
 	children: React.ReactNode
+	className?: string
 	disabled?: boolean
 	onClick?: () => void
 	innerRef?: (ref: HTMLButtonElement) => void
@@ -9,6 +10,7 @@ interface Props {
 
 const TextInput: NextPage<Props> = ({
 	children,
+	className,
 	disabled = false,
 	onClick,
 	innerRef,
@@ -20,7 +22,7 @@ const TextInput: NextPage<Props> = ({
 	return (
 		<button
 			type='button'
-			className={`text-white rounded-lg px-5 py-2.5 ${style}`}
+			className={`inline text-white rounded-lg px-5 py-2.5 ${style} ${className}`}
 			disabled={disabled}
 			onClick={onClick}
 			ref={innerRef}

@@ -1,7 +1,13 @@
 import { NextPage } from 'next'
 import { useState } from 'react'
 
-import { CreationSelectionLine, Button, SelectInput, LockOverlay } from 'components'
+import {
+	Button,
+	CreationSelectionLine,
+	LockOverlay,
+	SelectInput,
+	TextSeparator,
+} from 'components'
 import { Career, Race } from 'models'
 
 import WarHammer from 'warHammer'
@@ -90,11 +96,9 @@ const CareerSelection: NextPage<Props> = ({
 					locked={chooseCareer}
 				/>
 			</div>
-			<div className='flex justify-center items-center my-4'>
-				<hr className='grow h-px border-none bg-gray-500 mx-2'/>
-				<span className='text-xl font-bold'>ou</span>
-				<hr className='grow h-px border-none bg-gray-500 mx-2'/>
-			</div>
+			<TextSeparator className='my-4'>
+				ou
+			</TextSeparator>
 			<div className='flex justify-center mb-4'>
 				<Button
 					disabled={moreOptions}
@@ -123,11 +127,9 @@ const CareerSelection: NextPage<Props> = ({
 					locked={!moreOptions || chooseCareer}
 				/>
 			</div>
-			<div className='flex justify-center items-center my-4'>
-				<hr className='grow h-px border-none bg-gray-500 mx-2'/>
-				<span className='text-xl font-bold'>ou</span>
-				<hr className='grow h-px border-none bg-gray-500 mx-2'/>
-			</div>
+			<TextSeparator className='my-4'>
+				ou
+			</TextSeparator>
 			<div className='flex justify-center mb-4'>
 				<Button
 					disabled={!moreOptions || chooseCareer}

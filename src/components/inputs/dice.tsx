@@ -15,7 +15,7 @@ const Dice: NextPage<Props> = ({
 	value,
 	max,
 	oneRoll = false,
-	onRolled
+	onRolled,
 }) => {
 	const [isRolling, setIsRolling] = useState<boolean>(false)
 	const [rollingNumber, setRollingNumber] = useState<number>(0)
@@ -23,21 +23,7 @@ const Dice: NextPage<Props> = ({
 
 	const disabled = !isRolling && oneRoll && hasRolled
 
-	useEffect(() => {
-		if (isRolling) setTimeout(() => {
-			setRollingNumber(Random.int(1, max))
-		}, 100)
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [rollingNumber, max])
-
-	useEffect(() => {
-		if (!isRolling && hasRolled) {
-			onRolled && onRolled(rollingNumber)
-		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [isRolling])
-
-	const onClick = () => {
+	const rollDice = () => {
 		if (isRolling) return
 		if (oneRoll && hasRolled) return
 		setHasRolled(true)
@@ -47,6 +33,19 @@ const Dice: NextPage<Props> = ({
 			setIsRolling(false)
 		}, 500)
 	}
+
+	useEffect(() => {
+		if (isRolling) setTimeout(() => {
+			setRollingNumber(Random.int(1, max))
+		}, 100)
+	}, [rollingNumber, max])
+
+	useEffect(() => {
+		if (!isRolling && hasRolled) {
+			onRolled && onRolled(rollingNumber)
+		}
+	}, [isRolling])
+
 
 	const colorsStyle = isRolling
 		? 'bg-purple-900 border-purple-700 cursor-default'
@@ -59,7 +58,7 @@ const Dice: NextPage<Props> = ({
 	return (
 		<div
 			className={`w-12 h-12 flex justify-center items-center border-2 rounded-lg font-bold text-2xl cursor-pointer ${colorsStyle} ${disabledStyle} ${className}`}	
-			onClick={onClick}
+			onClick={rollDice}
 		>
 			{isRolling ? rollingNumber : (value ?? max)}
 		</div>
