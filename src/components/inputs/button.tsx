@@ -10,7 +10,7 @@ interface Props {
 
 const TextInput: NextPage<Props> = ({
 	children,
-	className,
+	className = '',
 	disabled = false,
 	onClick,
 	innerRef,

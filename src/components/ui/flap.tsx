@@ -9,7 +9,7 @@ interface Props {
 }
 
 const Flap: NextPage<Props> = ({
-	className,
+	className = '',
 	label,
 	secondaryLabel,
 	color,

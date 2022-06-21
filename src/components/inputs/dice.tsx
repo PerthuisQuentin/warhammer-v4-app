@@ -4,7 +4,6 @@ import Random from 'random'
 
 interface Props {
 	className?: string
-	size?: string
 	value?: number
 	max: number
 	oneRoll?: boolean
@@ -12,8 +11,7 @@ interface Props {
 }
 
 const Dice: NextPage<Props> = ({
-	className,
-	size = '12',
+	className = '',
 	value,
 	max,
 	oneRoll = false,
@@ -56,9 +54,12 @@ const Dice: NextPage<Props> = ({
 		? 'opacity-75 cursor-default pointer-events-none'
 		: ''
 
+	let sizeStyle = 'w-12 h-12'
+	if (max <= 10) sizeStyle = 'w-10 h-10'
+
 	return (
 		<div
-			className={`w-${size} h-${size} flex justify-center items-center border-2 rounded-lg font-bold text-2xl cursor-pointer ${colorsStyle} ${disabledStyle} ${className}`}	
+			className={`flex justify-center items-center border-2 rounded-lg font-bold text-2xl cursor-pointer ${sizeStyle} ${colorsStyle} ${disabledStyle} ${className}`}	
 			onClick={rollDice}
 		>
 			{isRolling ? rollingNumber : (value ?? max)}

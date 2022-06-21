@@ -51,7 +51,6 @@ const CharacteristicsCreation: NextPage<Props> = ({
 						</span>
 						<Dice
 							className='mt-2'
-							size='10'
 							value={characteristicRolls[0]}
 							max={10}
 							oneRoll={true}
@@ -59,7 +58,6 @@ const CharacteristicsCreation: NextPage<Props> = ({
 						/>
 						<Dice
 							className='mt-2'
-							size='10'
 							value={characteristicRolls[1]}
 							max={10}
 							oneRoll={true}

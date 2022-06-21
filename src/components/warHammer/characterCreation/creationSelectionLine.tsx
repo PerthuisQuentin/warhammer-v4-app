@@ -12,7 +12,7 @@ interface Props {
 }
 
 const CreationSelectionLine: NextPage<Props> = ({
-	className,
+	className = '',
 	roll,
 	label,
 	buttonLabel,

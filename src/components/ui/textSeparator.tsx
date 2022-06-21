@@ -7,7 +7,7 @@ interface Props {
 
 const TextSeparator: NextPage<Props> = ({
 	children,
-	className,
+	className = '',
 }) => {
 	return (
 		<div className={`flex justify-center items-center ${className}`}>
