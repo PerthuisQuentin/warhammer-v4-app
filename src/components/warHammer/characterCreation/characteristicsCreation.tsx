@@ -44,20 +44,22 @@ const CharacteristicsCreation: NextPage<Props> = ({
 				return (
 					<div
 						key={characteristic.id}
-						className='flex flex-col items-center rounded-lg '
+						className='w-10 flex flex-col items-center rounded-lg '
 					>
 						<span className='font-bold text-xl'>
 							{characteristic.abbreviation}
 						</span>
 						<Dice
-							className='mt-2 w-10 h-10'
+							className='mt-2'
+							size='10'
 							value={characteristicRolls[0]}
 							max={10}
 							oneRoll={true}
 							onRolled={onRoll(characteristic.id, 0)}
 						/>
 						<Dice
-							className='mt-2 w-10 h-10'
+							className='mt-2'
+							size='10'
 							value={characteristicRolls[1]}
 							max={10}
 							oneRoll={true}

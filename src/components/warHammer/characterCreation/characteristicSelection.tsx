@@ -91,8 +91,8 @@ const CharacteristicSelection: NextPage<Props> = ({
 			: characteristicsRolls
 		
 		let xpGain = XP_ON_RANDOM_CHARACTERISTICS
-		if (reorganized) xp = XP_ON_REORGANIZED_CHARACTERISTICS
-		if (distributed || reRolled) xp = XP_ON_DISTRIBUTED_OR_REROLLED_CHARACTERISTICS
+		if (reorganized) xpGain = XP_ON_REORGANIZED_CHARACTERISTICS
+		if (distributed || reRolled) xpGain = XP_ON_DISTRIBUTED_OR_REROLLED_CHARACTERISTICS
 
 		onCharacteristicsSelected && onCharacteristicsSelected({
 			characteristics,
