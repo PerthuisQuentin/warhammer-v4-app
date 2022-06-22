@@ -1,4 +1,4 @@
-import { NextPage } from 'next'
+import { FunctionComponent } from 'react'
 import { useState } from 'react'
 
 import WarHammer from 'warHammer'
@@ -8,7 +8,7 @@ interface Props {
 	onReorganize?: (characteristicIdA: string, characteristicIdB: string) => void
 }
 
-const CharacteristicReorganizable: NextPage<Props> = ({
+const CharacteristicReorganizable: FunctionComponent<Props> = ({
 	characteristicsRolls,
 	onReorganize,
 }) => {

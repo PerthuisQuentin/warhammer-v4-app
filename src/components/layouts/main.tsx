@@ -1,5 +1,5 @@
 
-import { NextPage } from 'next'
+import { FunctionComponent } from 'react'
 import Head from 'next/head'
 
 import { Header, Navigation } from 'components'
@@ -8,7 +8,7 @@ interface Props {
 	children: React.ReactNode
 }
 
-const Main: NextPage<Props> = ({
+const Main: FunctionComponent<Props> = ({
 	children,
 }) => {
 	return (

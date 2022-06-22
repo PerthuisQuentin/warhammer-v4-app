@@ -1,4 +1,4 @@
-import { NextPage } from 'next'
+import { FunctionComponent } from 'react'
 
 import { Talent as TalentModel } from 'models'
 import { TalentMaxType } from 'types'
@@ -20,7 +20,7 @@ const talentToMaxText: Record<TalentMaxType, (talent: TalentModel) => string> = 
 	[TalentMaxType.None]: () => 'Aucun',
 }
 
-const Talent: NextPage<Props> = ({ talent }) => {
+const Talent: FunctionComponent<Props> = ({ talent }) => {
 	const talentName = talent.specializationName
 		? `${talent.name} (${talent.specializationName})`
 		: talent.name

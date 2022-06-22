@@ -1,4 +1,4 @@
-import { NextPage } from 'next'
+import { FunctionComponent } from 'react'
 
 interface Props {
 	steps: number
@@ -6,7 +6,7 @@ interface Props {
 	className?: string
 }
 
-const StepsLine: NextPage<Props> = ({
+const StepsLine: FunctionComponent<Props> = ({
 	steps = 1,
 	currentStep,
 	className

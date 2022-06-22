@@ -1,4 +1,4 @@
-import { NextPage } from 'next'
+import { FunctionComponent } from 'react'
 
 interface Props {
 	id: string
@@ -11,7 +11,7 @@ interface Props {
 	onChange?: (value: string) => void
 }
 
-const SelectInput: NextPage<Props> = ({
+const SelectInput: FunctionComponent<Props> = ({
 	id,
 	label,
 	value,

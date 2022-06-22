@@ -1,4 +1,4 @@
-import { NextPage } from 'next'
+import { FunctionComponent } from 'react'
 
 import { Flap } from 'components'
 import { Characteristic } from 'models'
@@ -7,7 +7,7 @@ interface Props {
 	characteristic: Characteristic
 }
 
-const CharacteristicFlap: NextPage<Props> = ({
+const CharacteristicFlap: FunctionComponent<Props> = ({
 	characteristic,
 }) => {
 	return (

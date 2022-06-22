@@ -1,10 +1,10 @@
-import { NextPage } from 'next'
+import { FunctionComponent } from 'react'
 
 import { Characteristic } from 'components'
 
 import WarHammer from 'warHammer'
 
-const CharacteristicList: NextPage = () => {
+const CharacteristicList: FunctionComponent = () => {
 	const characteristicItems = WarHammer
 		.characteristics
 		.map(characteristic => (

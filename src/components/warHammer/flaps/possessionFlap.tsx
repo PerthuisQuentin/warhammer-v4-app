@@ -1,4 +1,4 @@
-import { NextPage } from 'next'
+import { FunctionComponent } from 'react'
 
 import { Flap } from 'components'
 
@@ -6,7 +6,7 @@ interface Props {
 	possession: string
 }
 
-const PossessionFlap: NextPage<Props> = ({
+const PossessionFlap: FunctionComponent<Props> = ({
 	possession,
 }) => {
 	return (

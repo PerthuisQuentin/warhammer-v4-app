@@ -1,4 +1,4 @@
-import { NextPage } from 'next'
+import { FunctionComponent } from 'react'
 import { useState } from 'react'
 import { PlusIcon, MinusIcon } from '@heroicons/react/solid'
 
@@ -15,7 +15,7 @@ interface Props {
 	onChange?: (characteristicId: string, value: number, remainingPoints: number) => void
 }
 
-const CharacteristicsDistributable: NextPage<Props> = ({
+const CharacteristicsDistributable: FunctionComponent<Props> = ({
 	characteristicsDistributed,
 	onChange,
 }) => {

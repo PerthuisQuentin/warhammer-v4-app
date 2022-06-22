@@ -1,4 +1,4 @@
-import { NextPage } from 'next'
+import { FunctionComponent } from 'react'
 
 import { Evolution as EvolutionModel } from 'models'
 import { Status, CharacteristicFlap, SkillFlap, TalentFlap, PossessionFlap } from 'components'
@@ -7,7 +7,7 @@ interface Props {
 	evolution: EvolutionModel
 }
 
-const Evolution: NextPage<Props> = ({ evolution }) => {
+const Evolution: FunctionComponent<Props> = ({ evolution }) => {
 	const characteristics = evolution.characteristics
 		.map(characteristic => (
 			<CharacteristicFlap

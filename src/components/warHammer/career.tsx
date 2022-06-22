@@ -1,4 +1,4 @@
-import { NextPage } from 'next'
+import { FunctionComponent } from 'react'
 
 import { Career as CareerModel } from 'models'
 import { Evolution } from 'components'
@@ -7,7 +7,7 @@ interface Props {
 	career: CareerModel
 }
 
-const Career: NextPage<Props> = ({ career }) => {
+const Career: FunctionComponent<Props> = ({ career }) => {
 	const careerEvolutionItems = career.evolutions.map(evolution => (
 		<Evolution
 			key={evolution.name}

@@ -1,4 +1,4 @@
-import { NextPage } from 'next'
+import { FunctionComponent } from 'react'
 import { useEffect, useState } from 'react'
 
 import {
@@ -29,7 +29,7 @@ interface Props {
 	}) => void
 }
 
-const CharacteristicSelection: NextPage<Props> = ({
+const CharacteristicSelection: FunctionComponent<Props> = ({
 	race,
 	onCharacteristicsSelected,
 }) => {

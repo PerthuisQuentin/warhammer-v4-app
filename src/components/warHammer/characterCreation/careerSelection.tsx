@@ -1,4 +1,4 @@
-import { NextPage } from 'next'
+import { FunctionComponent } from 'react'
 import { useState } from 'react'
 
 import {
@@ -21,7 +21,7 @@ interface Props {
 	onCareerSelected?: (event: { career: Career, xp: number }) => void
 }
 
-const CareerSelection: NextPage<Props> = ({
+const CareerSelection: FunctionComponent<Props> = ({
 	race,
 	onCareerSelected,
 }) => {

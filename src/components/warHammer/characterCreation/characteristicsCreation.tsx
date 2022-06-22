@@ -1,4 +1,4 @@
-import { NextPage } from 'next'
+import { FunctionComponent } from 'react'
 
 import { Dice } from 'components'
 import { useMap } from 'hooks'
@@ -14,7 +14,7 @@ interface Props {
 	}) => void,
 }
 
-const CharacteristicsCreation: NextPage<Props> = ({
+const CharacteristicsCreation: FunctionComponent<Props> = ({
 	onCharacteristicRolled,
 }) => {
 	const [characteristicsRolls, { set: setCharacteristicRoll }] = useMap<string, number[]>(initialCharacteristicsRollsEntries)

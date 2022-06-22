@@ -1,4 +1,4 @@
-import { NextPage } from 'next'
+import { FunctionComponent } from 'react'
 import { LockClosedIcon } from '@heroicons/react/solid'
 import { useEffect, useState } from 'react'
 
@@ -8,7 +8,7 @@ interface Props {
 
 const DELAY = 300
 
-const LockOverlay: NextPage<Props> = ({
+const LockOverlay: FunctionComponent<Props> = ({
 	locked = true,
 }) => {
 	const [visible, setVisible] = useState<boolean>(locked)

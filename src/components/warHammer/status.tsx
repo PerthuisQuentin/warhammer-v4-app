@@ -1,4 +1,4 @@
-import { NextPage } from 'next'
+import { FunctionComponent } from 'react'
 
 import { Status as StatusModel } from 'models'
 
@@ -12,7 +12,7 @@ interface Props {
 	status: StatusModel
 }
 
-const Status: NextPage<Props> = ({ status }) => {
+const Status: FunctionComponent<Props> = ({ status }) => {
 	const backgroundColor = RANK_TYPE_TO_COLOR[status.tier.id]
 
 	return (

@@ -1,4 +1,4 @@
-import { NextPage } from 'next'
+import { FunctionComponent } from 'react'
 
 interface Props {
 	children: React.ReactNode
@@ -8,7 +8,7 @@ interface Props {
 	innerRef?: (ref: HTMLButtonElement) => void
 }
 
-const TextInput: NextPage<Props> = ({
+const TextInput: FunctionComponent<Props> = ({
 	children,
 	className = '',
 	disabled = false,

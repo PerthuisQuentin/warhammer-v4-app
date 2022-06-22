@@ -1,4 +1,4 @@
-import { NextPage } from 'next'
+import { FunctionComponent } from 'react'
 
 import { Button, Dice } from 'components'
 
@@ -11,7 +11,7 @@ interface Props {
 	onChoose?: () => void
 }
 
-const CreationSelectionLine: NextPage<Props> = ({
+const CreationSelectionLine: FunctionComponent<Props> = ({
 	className = '',
 	roll,
 	label,

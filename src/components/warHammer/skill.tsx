@@ -1,4 +1,4 @@
-import { NextPage } from 'next'
+import { FunctionComponent } from 'react'
 
 import { Skill as SkillModel } from 'models'
 
@@ -6,7 +6,7 @@ interface Props {
 	skill: SkillModel
 }
 
-const Skill: NextPage<Props> = ({ skill }) => {
+const Skill: FunctionComponent<Props> = ({ skill }) => {
 	const attributes = [skill.base ? 'Base' : 'Avancée']
 	if (skill.grouped) attributes.push('Groupée')
 

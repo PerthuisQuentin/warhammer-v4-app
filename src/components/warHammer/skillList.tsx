@@ -1,4 +1,4 @@
-import { NextPage } from 'next'
+import { FunctionComponent } from 'react'
 
 import { Skill } from 'components'
 import { SkillSearchCriteria } from 'types'
@@ -9,7 +9,7 @@ interface Props {
 	searchCriteria: SkillSearchCriteria
 }
 
-const SkillList: NextPage<Props> = ({ searchCriteria }) => {
+const SkillList: FunctionComponent<Props> = ({ searchCriteria }) => {
 	const skillItems = WarHammer
 		.getFilteredSkills(searchCriteria)
 		.map(skill => (

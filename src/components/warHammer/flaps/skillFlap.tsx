@@ -1,4 +1,4 @@
-import { NextPage } from 'next'
+import { FunctionComponent } from 'react'
 
 import { Flap } from 'components'
 import { EvolutionSkill } from 'models'
@@ -7,7 +7,7 @@ interface Props {
 	evolutionSkill: EvolutionSkill
 }
 
-const SkillFlap: NextPage<Props> = ({
+const SkillFlap: FunctionComponent<Props> = ({
 	evolutionSkill,
 }) => {
 	let specializationLabel

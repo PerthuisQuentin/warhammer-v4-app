@@ -1,4 +1,4 @@
-import { NextPage } from 'next'
+import { FunctionComponent } from 'react'
 
 interface Props {
 	className?: string
@@ -8,7 +8,7 @@ interface Props {
 	secondaryColor?: string
 }
 
-const Flap: NextPage<Props> = ({
+const Flap: FunctionComponent<Props> = ({
 	className = '',
 	label,
 	secondaryLabel,

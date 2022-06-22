@@ -1,4 +1,4 @@
-import { NextPage } from 'next'
+import { FunctionComponent } from 'react'
 
 import { Race } from 'models'
 
@@ -9,7 +9,7 @@ interface Props {
 	finalCharacteristics: ReadonlyMap<string, number>
 }
 
-const FinalCharacteristics: NextPage<Props> = ({
+const FinalCharacteristics: FunctionComponent<Props> = ({
 	race,
 	finalCharacteristics,
 }) => {

@@ -1,4 +1,4 @@
-import { NextPage } from 'next'
+import { FunctionComponent } from 'react'
 import { useEffect, useState } from 'react'
 import Random from 'random'
 
@@ -10,7 +10,7 @@ interface Props {
 	onRolled?: (value: number) => void
 }
 
-const Dice: NextPage<Props> = ({
+const Dice: FunctionComponent<Props> = ({
 	className = '',
 	value,
 	max,

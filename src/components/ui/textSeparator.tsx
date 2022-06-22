@@ -1,11 +1,11 @@
-import { NextPage } from 'next'
+import { FunctionComponent } from 'react'
 
 interface Props {
 	children: React.ReactNode,
 	className?: string,
 }
 
-const TextSeparator: NextPage<Props> = ({
+const TextSeparator: FunctionComponent<Props> = ({
 	children,
 	className = '',
 }) => {

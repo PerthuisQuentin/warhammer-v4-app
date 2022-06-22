@@ -1,4 +1,4 @@
-import { NextPage } from 'next'
+import { FunctionComponent } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 
@@ -25,7 +25,7 @@ const links = [
 	}
 ]
 
-const Navigation: NextPage = () => {
+const Navigation: FunctionComponent = () => {
 	const router = useRouter()
 
 	const linkItems = links.map(link => {
