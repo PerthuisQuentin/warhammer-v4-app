@@ -20,3 +20,6 @@ export {
 export type {
 	TalentPayload,
 } from './talents'
+export {
+	FlapColor
+} from './flap'

@@ -1,7 +1,10 @@
 import { FunctionComponent } from 'react'
+import { useDispatch } from 'react-redux'
 
 import { Flap } from 'components'
 import { EvolutionTalent } from 'models'
+import { FlapColor } from 'types'
+import { openTalent } from 'store/warHammerModals'
 
 interface Props {
 	evolutionTalent: EvolutionTalent
@@ -10,6 +13,9 @@ interface Props {
 const TalentFlap: FunctionComponent<Props> = ({
 	evolutionTalent,
 }) => {
+	const dispatch = useDispatch()
+	const openTalentModal = () => dispatch(openTalent(evolutionTalent.talent.id))
+
 	let specializationLabel
 
 	if (evolutionTalent.specialized) {
@@ -28,8 +34,8 @@ const TalentFlap: FunctionComponent<Props> = ({
 		<Flap 
 			label={evolutionTalent.talent.name}
 			secondaryLabel={specializationLabel}
-			color='bg-green-700'
-			secondaryColor='bg-green-600'
+			color={FlapColor.Green}
+			onClick={openTalentModal}
 		/>
 	)
 }

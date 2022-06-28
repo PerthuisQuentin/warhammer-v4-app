@@ -7,6 +7,7 @@ export { default as LockOverlay } from './ui/lockOverlay'
 export { default as StepsLine } from './ui/stepsLine'
 export { default as Flap } from './ui/flap'
 export { default as TextSeparator } from './ui/textSeparator'
+export { default as Modal } from './ui/modal'
 
 export { default as Main } from './layouts/main'
 

@@ -1,10 +1,10 @@
 import type { NextPage } from 'next'
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/router'
 
 import { Button } from 'components'
 
 const Home: NextPage = () => {
-	const router = useRouter();
+	const router = useRouter()
 
 	return (
 		<div className='flex flex-col justify-center items-center'>

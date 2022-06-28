@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react'
 
 import { Flap } from 'components'
+import { FlapColor } from 'types'
 
 interface Props {
 	possession: string
@@ -12,7 +13,7 @@ const PossessionFlap: FunctionComponent<Props> = ({
 	return (
 		<Flap 
 			label={possession}
-			color='bg-red-700'
+			color={FlapColor.Red}
 		/>
 	)
 }
