@@ -1,6 +1,5 @@
 import { FunctionComponent } from 'react'
-import { useState } from 'react'
-import { PlusIcon, MinusIcon } from '@heroicons/react/solid'
+import { PlusIcon, MinusIcon } from '@heroicons/react/24/solid'
 
 import { Button } from 'components'
 

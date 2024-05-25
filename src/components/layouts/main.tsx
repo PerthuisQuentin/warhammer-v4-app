@@ -17,14 +17,15 @@ const Main: FunctionComponent<Props> = ({
 	children,
 }) => {
 	const dispatch = useDispatch()
-	const warHammerModals = useSelector((state: RootState) => ({
-		isCharacteristicOpen: state.warHammerModals.isCharacteristicOpen,
-		isSkillOpen: state.warHammerModals.isSkillOpen,
-		isTalentOpen: state.warHammerModals.isTalentOpen,
-		characteristic: WarHammer.getCharacteristic(state.warHammerModals.characteristicId),
-		skill: WarHammer.getSkill(state.warHammerModals.skillId),
-		talent: WarHammer.getTalent(state.warHammerModals.talentId),
-	}))
+
+	const isCharacteristicOpen = useSelector((state: RootState) => state.warHammerModals.isCharacteristicOpen)
+	const characteristicId = useSelector((state: RootState) => state.warHammerModals.characteristicId)
+
+	const isSkillOpen = useSelector((state: RootState) => state.warHammerModals.isSkillOpen)
+	const skillId = useSelector((state: RootState) => state.warHammerModals.skillId)
+
+	const isTalentOpen = useSelector((state: RootState) => state.warHammerModals.isTalentOpen)
+	const talentId = useSelector((state: RootState) => state.warHammerModals.talentId)
 
 	return (
 		<div className='flex min-h-screen flex-col items-center bg-gray-900 text-white'>
@@ -40,34 +41,34 @@ const Main: FunctionComponent<Props> = ({
 			</div>
 			<Modal
 				title='Caractéristique'
-				open={warHammerModals.isCharacteristicOpen}
+				open={isCharacteristicOpen}
 				onClose={() => dispatch(closeCharacteristic())}
 			>
-				{warHammerModals.characteristic && (
+				{characteristicId && (
 					<Characteristic
-						characteristic={warHammerModals.characteristic}
+						characteristic={WarHammer.getCharacteristic(characteristicId)!}
 					/>
 				)}
 			</Modal>
 			<Modal
 				title='Compétence'
-				open={warHammerModals.isSkillOpen}
+				open={isSkillOpen}
 				onClose={() => dispatch(closeSkill())}
 			>
-				{warHammerModals.skill && (
+				{skillId && (
 					<Skill
-						skill={warHammerModals.skill}
+						skill={WarHammer.getSkill(skillId)!}
 					/>
 				)}
 			</Modal>
 			<Modal
 				title='Talent'
-				open={warHammerModals.isTalentOpen}
+				open={isTalentOpen}
 				onClose={() => dispatch(closeTalent())}
 			>
-				{warHammerModals.talent && (
+				{talentId && (
 					<Talent
-						talent={warHammerModals.talent}
+						talent={WarHammer.getTalent(talentId)!}
 					/>
 				)}
 			</Modal>

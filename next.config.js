@@ -2,7 +2,5 @@
 module.exports = {
 	basePath: '/warhammer',
 	reactStrictMode: true,
-	experimental: {
-		outputStandalone: true,
-	},
+	output: 'export',
 }

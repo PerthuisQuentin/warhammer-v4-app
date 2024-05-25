@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react'
-import { XIcon } from '@heroicons/react/solid'
+import { XMarkIcon } from '@heroicons/react/24/solid'
 
 interface Props {
 	children: React.ReactNode,
@@ -29,7 +29,7 @@ const Modal: FunctionComponent<Props> = ({
 								<span className='mr-8 text-xl text-white'>
 									{title}
 								</span>
-								<XIcon
+								<XMarkIcon
 									className='w-6 h-6 p-px text-white rounded-lg hover:bg-gray-500'
 									onClick={close}
 								/>
@@ -45,4 +45,4 @@ const Modal: FunctionComponent<Props> = ({
 		: <></>
 }
 
-export default Modal  
+export default Modal

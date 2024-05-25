@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react'
-import { useRouter } from 'next/router'
+import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 
 const links = [
@@ -26,10 +26,10 @@ const links = [
 ]
 
 const Navigation: FunctionComponent = () => {
-	const router = useRouter()
+	const pathname = usePathname()
 
 	const linkItems = links.map(link => {
-		const isActive = link.href === router.asPath
+		const isActive = link.href === pathname
 
 		const linkStyle = isActive
 			? 'active text-blue-500 border-blue-500 pointer-events-none'
@@ -41,12 +41,11 @@ const Navigation: FunctionComponent = () => {
 				className='mx-2'
 			>
 				<Link
-					href={link.href} 
+					href={link.href}
+					className={`inline-block p-4 rounded-t-lg border-b-2 ${linkStyle}`}
 					passHref
 				>
-					<a className={`inline-block p-4 rounded-t-lg border-b-2 ${linkStyle}`}>
-						{link.label}
-					</a>
+					{link.label}
 				</Link>
 			</li>
 		)
