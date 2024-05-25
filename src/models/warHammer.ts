@@ -97,7 +97,7 @@ export default class WarHammer {
 		return races.map(race => {
 			const characteristicsBonuses: Map<string, number> = new Map(Object.entries(race.characteristicsBonuses))
 
-			return new Race(race.id, race.name, race.dice100, characteristicsBonuses)
+			return new Race(race.id, race.name, race.dice100, characteristicsBonuses, race.extraPoints)
 		})
 	}
 

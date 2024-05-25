@@ -14,6 +14,7 @@ export interface SpecializationJson extends IdName {}
 export interface RaceJson extends IdName {
 	dice100: number[]
 	characteristicsBonuses: Record<string, number>
+	extraPoints: number
 }
 
 export interface StatusJson {

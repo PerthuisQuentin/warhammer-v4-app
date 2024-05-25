@@ -5,6 +5,7 @@ import {
 	CareerSelection,
 	CharacteristicSelection,
 	RaceSelection,
+	ExtraPointsSelection,
 	StepsLine,
 } from 'components'
 import {
@@ -47,7 +48,7 @@ const CharacterCreation: NextPage = () => {
 	return (
 		<div className='w-full flex flex-col'>
 			<StepsLine
-				steps={4}
+				steps={5}
 				currentStep={currentStep}
 				className='mb-8'
 			/>
@@ -69,6 +70,12 @@ const CharacterCreation: NextPage = () => {
 				/>
 			)}
 			{currentStep === 4 && (
+				<ExtraPointsSelection
+					career={selectedCareer}
+					race={selectedRace}
+				/>
+			)}
+			{currentStep === 5 && (
 				<div className='flex flex-col justify-center items-center'>
 					<span className='text-xl font-bold mb-4'>Fin ! (Pour le moment)</span>
 					<span className='text-xl font-bold my-4'>+{totalXP} PX</span>

@@ -2,6 +2,7 @@ export { default as TextInput } from './inputs/textInput'
 export { default as SelectInput } from './inputs/selectInput'
 export { default as Button } from './inputs/button'
 export { default as Dice } from './inputs/dice'
+export { default as Toggle } from './inputs/toggle'
 
 export { default as LockOverlay } from './ui/lockOverlay'
 export { default as StepsLine } from './ui/stepsLine'
@@ -38,3 +39,5 @@ export { default as FinalCharacteristics } from './warHammer/characterCreation/f
 export { default as RaceSelection } from './warHammer/characterCreation/raceSelection'
 export { default as CareerSelection } from './warHammer/characterCreation/careerSelection'
 export { default as CharacteristicSelection } from './warHammer/characterCreation/characteristicSelection'
+export { default as ExtraPointsSelection } from './warHammer/characterCreation/extraPointsSelection'
+
